@@ -1,7 +1,7 @@
-extends Node2D
+extends Window
 
 var thread_scene = preload("res://panels/conversation/chat_thread.tscn")
-@onready var threads = $Window/VBoxContainer/ThreadContainer
+@onready var threads = $VBoxContainer/ThreadContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

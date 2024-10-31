@@ -3,39 +3,38 @@
 [ext_resource type="Script" path="res://panels/conversation/chat_panel.gd" id="1_4e6ho"]
 [ext_resource type="PackedScene" uid="uid://8ikidut0ekce" path="res://panels/conversation/chat_thread.tscn" id="2_ihf2c"]
 
-[node name="ChatPanel" type="Node2D"]
-script = ExtResource("1_4e6ho")
-
-[node name="Window" type="Window" parent="."]
+[node name="ChatPanel" type="Window"]
 title = "Chat Panel"
 initial_position = 1
 size = Vector2i(360, 480)
+borderless = true
+script = ExtResource("1_4e6ho")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Window"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 100.0
+offset_bottom = 66.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Window/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="NewChatButton" type="Button" parent="Window/VBoxContainer/HBoxContainer"]
+[node name="NewChatButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "New Chat"
 
-[node name="ThreadContainer" type="TabContainer" parent="Window/VBoxContainer"]
+[node name="ThreadContainer" type="TabContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 current_tab = 0
 drag_to_rearrange_enabled = true
 tabs_rearrange_group = 1
 
-[node name="ChatThread" parent="Window/VBoxContainer/ThreadContainer" instance=ExtResource("2_ihf2c")]
+[node name="ChatThread" parent="VBoxContainer/ThreadContainer" instance=ExtResource("2_ihf2c")]
 layout_mode = 2
 metadata/_tab_index = 0
-
-[connection signal="pressed" from="Window/VBoxContainer/HBoxContainer/NewChatButton" to="." method="_on_new_chat_button_pressed"]
