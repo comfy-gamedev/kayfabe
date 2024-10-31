@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://dri5ho1ig75iw"]
+
+[node name="RichTextDocument" type="Node2D"]
