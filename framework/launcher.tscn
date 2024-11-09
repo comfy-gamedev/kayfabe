@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://pll20oxcde3w"]
+
+[ext_resource type="Theme" uid="uid://k3xs7tj2j1ha" path="res://framework/launcher_theme.tres" id="1_ktluf"]
+[ext_resource type="Script" path="res://framework/launcher.gd" id="2_fc3sy"]
+
+[node name="Launcher" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ktluf")
+theme_type_variation = &"LauncherBackground"
+script = ExtResource("2_fc3sy")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="DesktopScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DesktopRows" type="VBoxContainer" parent="VBoxContainer/DesktopScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"ButtonBarBackground"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="CreateNewDesktopButton" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "Create New Desktop"
+
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/CreateNewDesktopButton" to="." method="_on_create_new_desktop_button_pressed"]

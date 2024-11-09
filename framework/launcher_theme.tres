@@ -1,0 +1,39 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://k3xs7tj2j1ha"]
+
+[ext_resource type="SystemFont" uid="uid://bbs4shird5niq" path="res://framework/microsoft_sans_serif.tres" id="1_k51m7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf5ju"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.483886, 0.429963, 0.412608, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p6s88"]
+bg_color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6blvp"]
+draw_center = false
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2143b"]
+bg_color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhf26"]
+bg_color = Color(0.180392, 0.180392, 0.180392, 1)
+
+[resource]
+default_font = ExtResource("1_k51m7")
+default_font_size = 20
+ButtonBarBackground/base_type = &"PanelContainer"
+ButtonBarBackground/styles/panel = SubResource("StyleBoxFlat_yf5ju")
+LauncherBackground/base_type = &"PanelContainer"
+LauncherBackground/styles/panel = SubResource("StyleBoxFlat_p6s88")
+LauncherRow/base_type = &"PanelContainer"
+LauncherRow/styles/focus = SubResource("StyleBoxFlat_6blvp")
+LauncherRow/styles/panel = SubResource("StyleBoxFlat_2143b")
+ScrollContainer/styles/panel = SubResource("StyleBoxFlat_uhf26")

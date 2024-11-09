@@ -24,7 +24,7 @@ const META_HIT_DETECTED = &"AppWindow_hit_detected"
 
 @export var frame_scene: PackedScene = preload("default_app_window_frame.tscn")
 
-var current: bool = false
+var is_current: bool = false
 
 var frame: Control
 
@@ -76,7 +76,7 @@ func _input(event: InputEvent) -> void:
 			return
 		if event.pressed and get_rect().has_point(event.position):
 			event.set_meta(META_HIT_DETECTED, true)
-			WindowManager.app_window_bring_to_front(self)
+			Desktop.current.window_bring_to_front(self)
 
 func _gui_input(event: InputEvent) -> void:
 	var e = event.xformed_by(get_global_transform())
@@ -137,7 +137,7 @@ func unmaximize() -> void:
 func _on_close_pressed() -> void:
 	close_requested.emit()
 	if close_when_requested:
-		WindowManager.app_window_close(self)
+		Desktop.current.window_close(self)
 
 func _on_maximize_pressed() -> void:
 	if not is_maximized:

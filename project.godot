@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="RolePage"
-run/main_scene="res://framework/scenes/main.tscn"
+run/main_scene="res://framework/launcher.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 run/low_processor_mode=true
 config/icon="res://icon.svg"
@@ -19,7 +19,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 AppManager="*res://framework/autoload/app_manager.gd"
-WindowManager="*res://framework/autoload/window_manager.tscn"
 
 [display]
 

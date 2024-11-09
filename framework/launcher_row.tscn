@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnimd37vysl35"]
+
+[ext_resource type="Script" path="res://framework/launcher_row.gd" id="1_7klqe"]
+[ext_resource type="Texture2D" uid="uid://b55okj8167m8s" path="res://themes/cyberfire/bliss.png" id="1_xxyhn"]
+
+[node name="LauncherRow" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+theme_type_variation = &"LauncherRow"
+script = ExtResource("1_7klqe")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="IconTextureRect" type="TextureRect" parent="HBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_xxyhn")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Brimblykrimps"
+
+[node name="NameLineEdit" type="LineEdit" parent="HBoxContainer/NameLabel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "New Desktop Name"
+
+[node name="LaunchButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 4
+text = "▶"
+
+[connection signal="focus_exited" from="HBoxContainer/NameLabel/NameLineEdit" to="." method="_on_name_line_edit_focus_exited"]
+[connection signal="text_submitted" from="HBoxContainer/NameLabel/NameLineEdit" to="." method="_on_name_line_edit_text_submitted"]
+[connection signal="pressed" from="HBoxContainer/LaunchButton" to="." method="_on_launch_button_pressed"]

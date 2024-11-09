@@ -1,15 +1,15 @@
 [gd_scene load_steps=2 format=3 uid="uid://q47mcsht12hf"]
 
-[ext_resource type="Script" path="res://framework/autoload/window_manager.gd" id="1_i7623"]
+[ext_resource type="Script" path="res://framework/desktop.gd" id="1_dy4nd"]
 
-[node name="WindowManager" type="Control"]
+[node name="Desktop" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_i7623")
+script = ExtResource("1_dy4nd")
 
 [node name="BackgroundCanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
@@ -36,6 +36,7 @@ fixed_column_width = 64
 icon_mode = 0
 icon_scale = 2.0
 
-[node name="WindowCanvasLayer" type="CanvasLayer" parent="."]
+[node name="WindowRoot" type="Node" parent="."]
+unique_name_in_owner = true
 
 [connection signal="item_activated" from="BackgroundCanvasLayer/AppItemList" to="." method="_on_app_item_list_item_activated"]

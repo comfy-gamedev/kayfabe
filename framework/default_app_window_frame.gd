@@ -35,7 +35,7 @@ var _user_buttons: Dictionary
 @onready var content_panel_container: PanelContainer = %AppWindowContentPanelContainer
 @onready var user_buttons_panel_container: PanelContainer = %AppWindowUserButtonsPanelContainer
 @onready var footer_panel_container: PanelContainer = %AppWindowFooterPanelContainer
-@onready var app_window_footer_h_box_container: HBoxContainer = %AppWindowFooterHBoxContainer
+@onready var window_footer_h_box_container: HBoxContainer = %AppWindowFooterHBoxContainer
 
 @onready var user_buttons_h_box_container: HBoxContainer = %AppWindowUserButtonsHBoxContainer
 
@@ -114,19 +114,19 @@ func _queue_update() -> void:
 func _update() -> void:
 	_update_queued = false
 	titlebar_panel_container.visible = show_titlebar
-	app_window_footer_h_box_container.visible = show_footer
+	window_footer_h_box_container.visible = show_footer
 	titlebar_label.text = title
 
-func _on_app_window_close_button_pressed() -> void:
+func _on_window_close_button_pressed() -> void:
 	close_pressed.emit()
 
-func _on_app_window_maximize_button_pressed() -> void:
+func _on_window_maximize_button_pressed() -> void:
 	maximize_pressed.emit()
 
-func _on_app_window_minimize_button_pressed() -> void:
+func _on_window_minimize_button_pressed() -> void:
 	minimize_pressed.emit()
 
-func _on_app_window_smile_button_pressed() -> void:
+func _on_window_smile_button_pressed() -> void:
 	smile_pressed.emit()
 
 func _on_user_button_pressed(id: StringName) -> void:
