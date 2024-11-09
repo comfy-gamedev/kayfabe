@@ -39,4 +39,7 @@ icon_scale = 2.0
 [node name="WindowRoot" type="Node" parent="."]
 unique_name_in_owner = true
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
+
 [connection signal="item_activated" from="BackgroundCanvasLayer/AppItemList" to="." method="_on_app_item_list_item_activated"]

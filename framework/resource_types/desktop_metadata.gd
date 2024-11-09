@@ -8,6 +8,7 @@ const SUBDIRS = ["documents"]
 
 @export var uuid: String = "": set = set_uuid
 @export var friendly_name: String = "": set = set_friendly_name
+@export var installed_apps: Array[StringName] = []
 
 static func create() -> DesktopMetadata:
 	var d = DesktopMetadata.new()
@@ -54,8 +55,11 @@ func set_friendly_name(v: String) -> void:
 	friendly_name = v
 	emit_changed()
 
+func get_icon_path() -> String:
+	return resource_path.get_base_dir().path_join("thumbnail.png")
+
 func get_icon() -> Texture2D:
-	var icon_path = resource_path.get_base_dir().path_join("icon.png")
+	var icon_path = get_icon_path()
 	if not FileAccess.file_exists(icon_path):
 		push_warning("No icon found: ", icon_path)
 		return null

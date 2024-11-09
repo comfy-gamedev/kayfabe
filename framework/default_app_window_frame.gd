@@ -67,7 +67,7 @@ func add_user_button(id: StringName, tooltip_text: String = "", normal_icon: Tex
 		button.add_theme_icon_override(ICON_NAMES[Icon.HOVER], hover_icon)
 	if pressed_icon:
 		button.add_theme_icon_override(ICON_NAMES[Icon.PRESSED], pressed_icon)
-	button.pressed.connect(_on_user_button_pressed.bind(id))
+	button.pressed.connect(_on_app_user_button_pressed.bind(id))
 	user_buttons_h_box_container.add_child(button)
 	_user_buttons[id] = button
 	_update_button_themes()
@@ -117,17 +117,17 @@ func _update() -> void:
 	window_footer_h_box_container.visible = show_footer
 	titlebar_label.text = title
 
-func _on_window_close_button_pressed() -> void:
+func _on_app_window_close_button_pressed() -> void:
 	close_pressed.emit()
 
-func _on_window_maximize_button_pressed() -> void:
+func _on_app_window_maximize_button_pressed() -> void:
 	maximize_pressed.emit()
 
-func _on_window_minimize_button_pressed() -> void:
+func _on_app_window_minimize_button_pressed() -> void:
 	minimize_pressed.emit()
 
-func _on_window_smile_button_pressed() -> void:
+func _on_app_window_smile_button_pressed() -> void:
 	smile_pressed.emit()
 
-func _on_user_button_pressed(id: StringName) -> void:
+func _on_app_user_button_pressed(id: StringName) -> void:
 	user_button_pressed.emit(id)

@@ -1,7 +1,7 @@
 class_name Desktop
 extends Control
 
-const WINDOW_FIRST_CANVAS_LAYER = 10
+const WINDOW_CANVAS_LAYER = 10
 
 static var current: Desktop
 
@@ -21,6 +21,7 @@ func _enter_tree() -> void:
 func _exit_tree() -> void:
 	if current == self:
 		current = null
+	_save_thumbnail()
 
 func _ready() -> void:
 	_title = get_window().title
@@ -39,7 +40,6 @@ func _ready() -> void:
 			service = service_source.instantiate()
 		app_services[app_key] = service
 		add_child(service)
-		
 
 func window_open(app_window: AppWindow) -> void:
 	if app_window.is_inside_tree():
@@ -47,6 +47,7 @@ func window_open(app_window: AppWindow) -> void:
 		return
 	assert(app_window not in windows)
 	var canvas_layer = CanvasLayer.new()
+	canvas_layer.layer = WINDOW_CANVAS_LAYER
 	canvas_layer.add_child(app_window)
 	window_root.add_child(canvas_layer)
 	app_window.position = size / 2.0 - app_window.size / 2.0
@@ -83,8 +84,13 @@ func _update_windows_z_index() -> void:
 	for i in windows.size():
 		var canvas_layer = windows[i].get_parent() as CanvasLayer
 		window_root.move_child(canvas_layer, i)
-		canvas_layer.layer = WINDOW_FIRST_CANVAS_LAYER + i
+		canvas_layer.child_order_changed.emit() # Needed to update canvas item sorting, possible godot bug?
 		windows[i].is_current = i == windows.size() - 1
+
+func _save_thumbnail() -> void:
+	var icon_img = get_viewport().get_texture().get_image()
+	icon_img.resize(400, 400 * icon_img.get_height() / icon_img.get_width(), Image.INTERPOLATE_LANCZOS)
+	icon_img.save_png(metadata.get_icon_path())
 
 func _on_frame_pre_draw() -> void:
 	_i = (_i + 1) % 10
