@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://okqg24fm5yv1"]
 
 [ext_resource type="Texture2D" uid="uid://bml5wig5mrok1" path="res://icon.svg" id="1_qvqei"]
-[ext_resource type="Script" path="res://panels/conversation/chat_message.gd" id="1_t1ngi"]
+[ext_resource type="Script" path="res://apps/conversation/chat_message.gd" id="1_t1ngi"]
 
 [node name="ChatMessage" type="MarginContainer"]
 custom_minimum_size = Vector2(300, 64)

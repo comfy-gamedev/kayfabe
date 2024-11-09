@@ -11,6 +11,26 @@ config_version=5
 [application]
 
 config/name="RolePage"
-run/main_scene="res://scenes/gameplay_desktop.tscn"
+run/main_scene="res://framework/scenes/main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+run/low_processor_mode=true
 config/icon="res://icon.svg"
+
+[autoload]
+
+AppManager="*res://framework/autoload/app_manager.gd"
+WindowManager="*res://framework/autoload/window_manager.tscn"
+
+[display]
+
+window/stretch/aspect="ignore"
+window/stretch/scale=2.0
+
+[gui]
+
+theme/custom="res://themes/cyberfire/theme.tres"
+theme/default_font_antialiasing=2
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

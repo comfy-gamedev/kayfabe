@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuyfpoxiv5w7g"]
+
+[ext_resource type="Script" path="res://framework/app_window.gd" id="1_yr7s7"]
+[ext_resource type="Script" path="res://apps/eyes/control.gd" id="2_i0i4p"]
+
+[node name="Eyes" type="Container"]
+offset_right = 187.0
+offset_bottom = 158.0
+mouse_filter = 0
+theme_type_variation = &"AppWindow"
+script = ExtResource("1_yr7s7")
+title = "Eyes"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("2_i0i4p")

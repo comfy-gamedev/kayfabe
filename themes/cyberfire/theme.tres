@@ -1,0 +1,295 @@
+[gd_resource type="Theme" load_steps=38 format=3 uid="uid://bvq77hnbdaw8x"]
+
+[ext_resource type="Texture2D" uid="uid://mh48osisb557" path="res://themes/cyberfire/cyberfire_icons.png" id="2_83hrn"]
+[ext_resource type="SystemFont" uid="uid://12by81v6gs72" path="res://themes/cyberfire/microsoft_sans_serif.tres" id="7_508xm"]
+[ext_resource type="Texture2D" uid="uid://b55okj8167m8s" path="res://themes/cyberfire/bliss.png" id="20_xdl2e"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6wfca"]
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(128, 32, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u5t86"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(112, 64, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_806wd"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(96, 64, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ugvwq"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(64, 64, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x1dna"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(80, 64, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6s3sb"]
+content_margin_left = 8.0
+content_margin_top = 5.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
+texture = ExtResource("2_83hrn")
+texture_margin_left = 8.0
+texture_margin_top = 7.0
+texture_margin_right = 8.0
+texture_margin_bottom = 7.0
+region_rect = Rect2(0, 16, 64, 20)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_urlt6"]
+content_margin_bottom = 28.0
+texture = ExtResource("2_83hrn")
+texture_margin_right = 8.0
+region_rect = Rect2(44, 36, 20, 28)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_avbie"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(112, 80, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2ajl7"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(96, 80, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mu7vr"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(64, 80, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_po8so"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(80, 80, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o6w7v"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(112, 48, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dlajy"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(96, 48, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wxuso"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(64, 48, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fojmd"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(80, 48, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v81lh"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(112, 96, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_prsi5"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(96, 96, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h448c"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(64, 96, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6pv2n"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(80, 96, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p52fn"]
+content_margin_left = 5.0
+content_margin_top = 0.0
+content_margin_right = 1.0
+content_margin_bottom = 0.0
+texture = ExtResource("2_83hrn")
+texture_margin_left = 8.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+region_rect = Rect2(0, 0, 64, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_20rho"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(112, 0, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kluir"]
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(128, 0, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hjseh"]
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(96, 0, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mum2c"]
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(64, 0, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sg8c8"]
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(80, 0, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kfknt"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+texture = ExtResource("2_83hrn")
+texture_margin_left = 8.0
+texture_margin_right = 23.0
+region_rect = Rect2(0, 36, 44, 28)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6dmbj"]
+texture = ExtResource("2_83hrn")
+expand_margin_right = 6.0
+region_rect = Rect2(130, 16, 22, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f0mbp"]
+texture = ExtResource("2_83hrn")
+expand_margin_right = 6.0
+region_rect = Rect2(152, 16, 22, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6ub7c"]
+texture = ExtResource("2_83hrn")
+expand_margin_right = 6.0
+region_rect = Rect2(108, 16, 22, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_frsg1"]
+texture = ExtResource("2_83hrn")
+expand_margin_right = 6.0
+region_rect = Rect2(64, 16, 22, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fud0a"]
+texture = ExtResource("2_83hrn")
+expand_margin_right = 6.0
+region_rect = Rect2(86, 16, 22, 16)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_clvjc"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_npu5v"]
+texture = ExtResource("2_83hrn")
+texture_margin_left = 10.0
+texture_margin_top = 4.0
+texture_margin_right = 10.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(113, 1, 14, 14)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gyj7j"]
+texture = ExtResource("20_xdl2e")
+
+[resource]
+default_font = ExtResource("7_508xm")
+default_font_size = 14
+AppWindow/base_type = &"Container"
+AppWindowButton/base_type = &"Button"
+AppWindowButton/styles/focus = SubResource("StyleBoxTexture_6wfca")
+AppWindowCloseButton/base_type = &"AppWindowButton"
+AppWindowCloseButton/icons/icon = null
+AppWindowCloseButton/styles/disabled = SubResource("StyleBoxTexture_u5t86")
+AppWindowCloseButton/styles/hover = SubResource("StyleBoxTexture_806wd")
+AppWindowCloseButton/styles/normal = SubResource("StyleBoxTexture_ugvwq")
+AppWindowCloseButton/styles/pressed = SubResource("StyleBoxTexture_x1dna")
+AppWindowContentPanelContainer/base_type = &"PanelContainer"
+AppWindowContentPanelContainer/styles/panel = SubResource("StyleBoxTexture_6s3sb")
+AppWindowFooterPanelContainer/base_type = &"PanelContainer"
+AppWindowFooterPanelContainer/styles/panel = SubResource("StyleBoxTexture_urlt6")
+AppWindowMaximizeButton/base_type = &"AppWindowButton"
+AppWindowMaximizeButton/styles/disabled = SubResource("StyleBoxTexture_avbie")
+AppWindowMaximizeButton/styles/hover = SubResource("StyleBoxTexture_2ajl7")
+AppWindowMaximizeButton/styles/normal = SubResource("StyleBoxTexture_mu7vr")
+AppWindowMaximizeButton/styles/pressed = SubResource("StyleBoxTexture_po8so")
+AppWindowMinimizeButton/base_type = &"AppWindowButton"
+AppWindowMinimizeButton/styles/disabled = SubResource("StyleBoxTexture_o6w7v")
+AppWindowMinimizeButton/styles/hover = SubResource("StyleBoxTexture_dlajy")
+AppWindowMinimizeButton/styles/normal = SubResource("StyleBoxTexture_wxuso")
+AppWindowMinimizeButton/styles/pressed = SubResource("StyleBoxTexture_fojmd")
+AppWindowSmileButton/base_type = &"AppWindowButton"
+AppWindowSmileButton/styles/disabled = SubResource("StyleBoxTexture_v81lh")
+AppWindowSmileButton/styles/hover = SubResource("StyleBoxTexture_prsi5")
+AppWindowSmileButton/styles/normal = SubResource("StyleBoxTexture_h448c")
+AppWindowSmileButton/styles/pressed = SubResource("StyleBoxTexture_6pv2n")
+AppWindowTitlebarHBoxContainer/base_type = &"HBoxContainer"
+AppWindowTitlebarHBoxContainer/constants/separation = 0
+AppWindowTitlebarLabel/base_type = &"Label"
+AppWindowTitlebarLabel/font_sizes/font_size = 14
+AppWindowTitlebarPanelContainer/base_type = &"PanelContainer"
+AppWindowTitlebarPanelContainer/styles/panel = SubResource("StyleBoxTexture_p52fn")
+AppWindowUserButton/base_type = &"Button"
+AppWindowUserButton/styles/disabled = SubResource("StyleBoxTexture_20rho")
+AppWindowUserButton/styles/focus = SubResource("StyleBoxTexture_kluir")
+AppWindowUserButton/styles/hover = SubResource("StyleBoxTexture_hjseh")
+AppWindowUserButton/styles/normal = SubResource("StyleBoxTexture_mum2c")
+AppWindowUserButton/styles/pressed = SubResource("StyleBoxTexture_sg8c8")
+AppWindowUserButtonsHBoxContainer/base_type = &"HBoxContainer"
+AppWindowUserButtonsHBoxContainer/constants/separation = 0
+AppWindowUserButtonsPanelContainer/base_type = &"PanelContainer"
+AppWindowUserButtonsPanelContainer/styles/panel = SubResource("StyleBoxTexture_kfknt")
+AppWindowUserLastButton/base_type = &"AppWindowUserButton"
+AppWindowUserLastButton/styles/disabled = SubResource("StyleBoxTexture_6dmbj")
+AppWindowUserLastButton/styles/focus = SubResource("StyleBoxTexture_f0mbp")
+AppWindowUserLastButton/styles/hover = SubResource("StyleBoxTexture_6ub7c")
+AppWindowUserLastButton/styles/normal = SubResource("StyleBoxTexture_frsg1")
+AppWindowUserLastButton/styles/pressed = SubResource("StyleBoxTexture_fud0a")
+ItemList/styles/panel = SubResource("StyleBoxEmpty_clvjc")
+TooltipPanel/styles/panel = SubResource("StyleBoxTexture_npu5v")
+Wallpaper/base_type = &"Panel"
+Wallpaper/styles/panel = SubResource("StyleBoxTexture_gyj7j")

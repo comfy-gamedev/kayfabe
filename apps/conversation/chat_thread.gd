@@ -1,6 +1,6 @@
 extends PanelContainer
 
-var message_scene = preload("res://panels/conversation/chat_message.tscn")
+var message_scene = preload("chat_message.tscn")
 
 @onready var message_box = $VBoxContainer/HBoxContainer/TextEdit
 @onready var message_history = $VBoxContainer/ScrollContainer/VBoxContainer

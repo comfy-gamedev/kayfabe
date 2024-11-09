@@ -1,0 +1,85 @@
+[gd_scene load_steps=2 format=3 uid="uid://ct5qq8nitawj0"]
+
+[ext_resource type="Script" path="res://framework/default_app_window_frame.gd" id="1_ql5xk"]
+
+[node name="AppWindowFrame" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"AppWindowFrame"
+theme_override_constants/separation = 0
+script = ExtResource("1_ql5xk")
+
+[node name="AppWindowTitlebarPanelContainer" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"AppWindowTitlebarPanelContainer"
+
+[node name="AppWindowTitlebarHBoxContainer" type="HBoxContainer" parent="AppWindowTitlebarPanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="AppWindowTitlebarLabel" type="Label" parent="AppWindowTitlebarPanelContainer/AppWindowTitlebarHBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AppWindowSmileButton" type="Button" parent="AppWindowTitlebarPanelContainer/AppWindowTitlebarHBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"AppWindowSmileButton"
+
+[node name="AppWindowMinimizeButton" type="Button" parent="AppWindowTitlebarPanelContainer/AppWindowTitlebarHBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"AppWindowMinimizeButton"
+
+[node name="AppWindowMaximizeButton" type="Button" parent="AppWindowTitlebarPanelContainer/AppWindowTitlebarHBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"AppWindowMaximizeButton"
+
+[node name="AppWindowCloseButton" type="Button" parent="AppWindowTitlebarPanelContainer/AppWindowTitlebarHBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"AppWindowCloseButton"
+
+[node name="AppWindowContentPanelContainer" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_type_variation = &"AppWindowContentPanelContainer"
+
+[node name="AppWindowFooterHBoxContainer" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"AppWindowFooterHBoxContainer"
+theme_override_constants/separation = 0
+
+[node name="AppWindowUserButtonsPanelContainer" type="PanelContainer" parent="AppWindowFooterHBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_type_variation = &"AppWindowUserButtonsPanelContainer"
+
+[node name="AppWindowUserButtonsHBoxContainer" type="HBoxContainer" parent="AppWindowFooterHBoxContainer/AppWindowUserButtonsPanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"AppWindowUserButtonsHBoxContainer"
+
+[node name="AppWindowFooterPanelContainer" type="PanelContainer" parent="AppWindowFooterHBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_type_variation = &"AppWindowFooterPanelContainer"
+
+[connection signal="pressed" from="AppWindowTitlebarPanelContainer/AppWindowTitlebarHBoxContainer/AppWindowSmileButton" to="." method="_on_app_window_smile_button_pressed"]
+[connection signal="pressed" from="AppWindowTitlebarPanelContainer/AppWindowTitlebarHBoxContainer/AppWindowMinimizeButton" to="." method="_on_app_window_minimize_button_pressed"]
+[connection signal="pressed" from="AppWindowTitlebarPanelContainer/AppWindowTitlebarHBoxContainer/AppWindowMaximizeButton" to="." method="_on_app_window_maximize_button_pressed"]
+[connection signal="pressed" from="AppWindowTitlebarPanelContainer/AppWindowTitlebarHBoxContainer/AppWindowCloseButton" to="." method="_on_app_window_close_button_pressed"]
