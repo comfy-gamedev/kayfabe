@@ -81,7 +81,9 @@ func window_bring_to_front(app_window: AppWindow) -> void:
 
 func _update_windows_z_index() -> void:
 	for i in windows.size():
-		(windows[i].get_parent() as CanvasLayer).layer = WINDOW_FIRST_CANVAS_LAYER + i
+		var canvas_layer = windows[i].get_parent() as CanvasLayer
+		window_root.move_child(canvas_layer, i)
+		canvas_layer.layer = WINDOW_FIRST_CANVAS_LAYER + i
 		windows[i].is_current = i == windows.size() - 1
 
 func _on_frame_pre_draw() -> void:
