@@ -10,6 +10,8 @@ static func _static_init() -> void:
 static func is_valid(str: String) -> bool:
 	return re.search(str) != null
 
+const ZERO = "00000000-0000-0000-0000-000000000000"
+
 static func v7() -> String:
 	var unix_timestamp_ms = floori(Time.get_unix_time_from_system() * 1000.0)
 	

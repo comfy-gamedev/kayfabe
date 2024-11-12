@@ -1,8 +1,5 @@
 extends PanelContainer
 
-const DESKTOPS_DIR = "user://desktops"
-const DESKTOP_METADATA_FILE = "desktop_metadata.tres"
-
 const LAUNCHER_ROW = preload("res://framework/launcher_row.tscn")
 
 var desktops: Dictionary
@@ -13,14 +10,14 @@ var new_row_uuid: String
 @onready var desktop_rows: VBoxContainer = %DesktopRows
 
 func _ready() -> void:
-	if DirAccess.dir_exists_absolute(DESKTOPS_DIR):
-		for d in DirAccess.get_directories_at(DESKTOPS_DIR):
+	if DirAccess.dir_exists_absolute(Framework.DESKTOPS_PATH):
+		for d in DirAccess.get_directories_at(Framework.DESKTOPS_PATH):
 			if UUID.is_valid(d):
-				var metadata_file = DESKTOPS_DIR.path_join(d).path_join(DESKTOP_METADATA_FILE)
+				var metadata_file = Framework.DESKTOPS_PATH.path_join(d).path_join(Framework.DESKTOP_METADATA_FILE)
 				if not FileAccess.file_exists(metadata_file):
 					push_error("Desktop directory missing metadata file: ", d)
 					continue
-				var metadata: DesktopMetadata = load(metadata_file)
+				var metadata: DesktopMetadata = ObjectJSON.parse_from_file(metadata_file, DesktopMetadata)
 				if not metadata:
 					push_error("Desktop metadata is invalid: ", d)
 					continue
@@ -74,7 +71,13 @@ func _on_row_name_edited(new_name: String, desktop_uuid: String) -> void:
 	else:
 		if new_name == "":
 			return
-		var metadata = desktops[desktop_uuid]
+		var metadata: DesktopMetadata = desktops[desktop_uuid]
+		if new_name == metadata.friendly_name:
+			return
 		metadata.friendly_name = new_name
-		ResourceSaver.save(metadata)
+		var metadata_path = Framework.get_desktop_root(metadata.uuid).path_join(Framework.DESKTOP_METADATA_FILE)
+		var err = ObjectJSON.stringify_to_file(metadata, metadata_path)
+		if err != OK:
+			push_error("Failed to save metadata %s: %s" % [metadata_path, error_string(err)])
+			return
 	rows[desktop_uuid].name_label.text = new_name
