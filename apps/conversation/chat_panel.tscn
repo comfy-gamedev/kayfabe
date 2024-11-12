@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dufb75jerlvqw"]
+[gd_scene load_steps=4 format=3 uid="uid://dufb75jerlvqw"]
 
-[ext_resource type="Script" path="res://apps/conversation/chat_panel.gd" id="1_4e6ho"]
+[ext_resource type="Script" path="res://framework/app_window.gd" id="1_d14mb"]
+[ext_resource type="Script" path="res://apps/conversation/thread_container.gd" id="2_dj0ri"]
 [ext_resource type="PackedScene" uid="uid://8ikidut0ekce" path="res://apps/conversation/chat_thread.tscn" id="2_ihf2c"]
 
 [node name="ChatPanel" type="Container"]
@@ -8,30 +9,16 @@ offset_right = 369.0
 offset_bottom = 348.0
 mouse_filter = 0
 theme_type_variation = &"AppWindow"
-script = ExtResource("1_4e6ho")
-title = "Chat"
+script = ExtResource("1_d14mb")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="NewChatButton" type="Button" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "New Chat"
-
-[node name="ThreadContainer" type="TabContainer" parent="VBoxContainer"]
+[node name="ThreadContainer" type="TabContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
 current_tab = 0
 drag_to_rearrange_enabled = true
 tabs_rearrange_group = 1
+script = ExtResource("2_dj0ri")
 
-[node name="ChatThread" parent="VBoxContainer/ThreadContainer" instance=ExtResource("2_ihf2c")]
+[node name="ChatThread" parent="ThreadContainer" instance=ExtResource("2_ihf2c")]
 layout_mode = 2
 metadata/_tab_index = 0
-
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/NewChatButton" to="." method="_on_new_chat_button_pressed"]
