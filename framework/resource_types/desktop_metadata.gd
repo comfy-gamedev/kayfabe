@@ -1,14 +1,13 @@
 class_name DesktopMetadata
-extends Resource
+extends RefCounted
 
-const DESKTOPS_DIR = "user://desktops"
-const DESKTOP_METADATA_FILE = "desktop_metadata.tres"
+signal changed()
 
 const SUBDIRS = ["documents"]
 
-@export var uuid: String = "": set = set_uuid
+@export var uuid: String = UUID.ZERO: set = set_uuid
 @export var friendly_name: String = "": set = set_friendly_name
-@export var installed_apps: Array[StringName] = []
+@export var installed_apps: Array = []
 
 static func create() -> DesktopMetadata:
 	var d = DesktopMetadata.new()
@@ -16,13 +15,10 @@ static func create() -> DesktopMetadata:
 	return d
 
 func initialize_directory() -> void:
-	if resource_path != "":
-		push_error("Already initialized: ", resource_path)
-		return
 	if not UUID.is_valid(uuid):
 		push_error("Invalid UUID.")
 		return
-	var dir = DESKTOPS_DIR.path_join(uuid)
+	var dir = Framework.get_desktop_root(uuid)
 	if DirAccess.dir_exists_absolute(dir):
 		push_error("Directory already exists: ", dir)
 		return
@@ -30,8 +26,11 @@ func initialize_directory() -> void:
 	if err != OK:
 		push_error("Failed to create directory %s: %s" % [dir, error_string(err)])
 		return
-	resource_path = dir.path_join(DESKTOP_METADATA_FILE)
-	ResourceSaver.save(self, resource_path)
+	var metadata_path = dir.path_join(Framework.DESKTOP_METADATA_FILE)
+	err = ObjectJSON.stringify_to_file(self, metadata_path)
+	if err != OK:
+		push_error("Failed to save metadata %s: %s" % [metadata_path, error_string(err)])
+		return
 	
 	for s in SUBDIRS:
 		var d = dir.path_join(s)
@@ -44,19 +43,16 @@ func set_uuid(v: String) -> void:
 	if v != "" and not UUID.is_valid(v):
 		push_warning("Invalid UUID.")
 		breakpoint
-	if resource_path != "":
-		push_error("Cannot change UUID of existing desktop.")
-		return
 	uuid = v
-	emit_changed()
+	changed.emit()
 
 func set_friendly_name(v: String) -> void:
 	if friendly_name == v: return
 	friendly_name = v
-	emit_changed()
+	changed.emit()
 
 func get_icon_path() -> String:
-	return resource_path.get_base_dir().path_join("thumbnail.png")
+	return Framework.get_desktop_root(uuid).path_join("thumbnail.png")
 
 func get_icon() -> Texture2D:
 	var icon_path = get_icon_path()

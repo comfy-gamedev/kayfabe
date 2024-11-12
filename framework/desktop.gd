@@ -1,18 +1,18 @@
 class_name Desktop
 extends Control
 
-const WINDOW_CANVAS_LAYER = 10
+const WINDOW_CANVAS_LAYER = 1
 
 static var current: Desktop
 
 var metadata: DesktopMetadata
 var windows: Array[AppWindow]
 var app_services: Dictionary
+var documents: Dictionary
 
 var _i: int = 0
 var _title: String
 
-@onready var app_item_list: ItemList = %AppItemList
 @onready var window_root: Node = %WindowRoot
 
 func _enter_tree() -> void:
@@ -29,9 +29,6 @@ func _ready() -> void:
 	
 	for app_key: StringName in AppManager.get_app_keys():
 		var manifest := AppManager.get_app_manifest(app_key)
-		var idx := app_item_list.add_item(manifest.name, manifest.icon)
-		app_item_list.set_item_metadata(idx, app_key)
-		
 		var service_source = load(manifest.service_node_path)
 		var service: AppService
 		if service_source is Script:
@@ -40,6 +37,19 @@ func _ready() -> void:
 			service = service_source.instantiate()
 		app_services[app_key] = service
 		add_child(service)
+	
+	for doc_uuid in DirAccess.get_directories_at(get_documents_dir()):
+		if not UUID.is_valid(doc_uuid):
+			push_error("Invalid document directory: ", doc_uuid)
+			continue
+		var doc = Document.open(metadata.uuid, doc_uuid)
+		if not doc:
+			push_error("Invalid document: ", doc_uuid)
+			continue
+		documents[doc_uuid] = doc
+
+func get_documents_dir() -> String:
+	return Framework.get_desktop_root(metadata.uuid).path_join("documents")
 
 func window_open(app_window: AppWindow) -> void:
 	if app_window.is_inside_tree():
@@ -88,6 +98,9 @@ func _update_windows_z_index() -> void:
 		windows[i].is_current = i == windows.size() - 1
 
 func _save_thumbnail() -> void:
+	if not metadata:
+		push_error("Can't save thumbnail: no desktop metadata.")
+		return
 	var icon_img = get_viewport().get_texture().get_image()
 	icon_img.resize(400, 400 * icon_img.get_height() / icon_img.get_width(), Image.INTERPOLATE_LANCZOS)
 	icon_img.save_png(metadata.get_icon_path())
@@ -95,7 +108,3 @@ func _save_thumbnail() -> void:
 func _on_frame_pre_draw() -> void:
 	_i = (_i + 1) % 10
 	get_window().title = "%s - %s" % [_title, _i]
-
-func _on_app_item_list_item_activated(index: int) -> void:
-	var app_key: StringName = app_item_list.get_item_metadata(index)
-	app_services[app_key]._icon_activated()

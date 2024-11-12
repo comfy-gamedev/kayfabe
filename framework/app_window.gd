@@ -60,9 +60,6 @@ func _process(_delta: float) -> void:
 			position += d
 		_dragging = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
 
-func _draw() -> void:
-	pass
-
 func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_SORT_CHILDREN:

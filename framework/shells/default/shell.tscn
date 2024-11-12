@@ -1,0 +1,79 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6twsln376grv"]
+
+[ext_resource type="Script" path="res://framework/shells/default/shell.gd" id="1_qlls7"]
+[ext_resource type="Script" path="res://framework/shells/default/app_item_list.gd" id="2_nwivk"]
+[ext_resource type="Script" path="res://framework/shells/default/search_line_edit.gd" id="3_82wmq"]
+
+[node name="Shell" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_qlls7")
+
+[node name="ShellBar" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShellBar"]
+layout_mode = 2
+
+[node name="MenuButton" type="Button" parent="ShellBar/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+toggle_mode = true
+text = "🍔Menu"
+
+[node name="MenuPanelContainer" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -295.0
+offset_right = 178.0
+offset_bottom = -32.0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuPanelContainer"]
+layout_mode = 2
+
+[node name="DesktopNameLabel" type="Label" parent="MenuPanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MenuPanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="AppItemList" type="Container" parent="MenuPanelContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+script = ExtResource("2_nwivk")
+
+[node name="SearchLineEdit" type="LineEdit" parent="MenuPanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Search"
+clear_button_enabled = true
+select_all_on_focus = true
+script = ExtResource("3_82wmq")
+
+[connection signal="pressed" from="ShellBar/HBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="app_clicked" from="MenuPanelContainer/VBoxContainer/ScrollContainer/AppItemList" to="." method="_on_app_item_list_app_clicked"]
+[connection signal="down_pressed" from="MenuPanelContainer/VBoxContainer/SearchLineEdit" to="." method="_on_search_line_edit_down_pressed"]
+[connection signal="text_changed" from="MenuPanelContainer/VBoxContainer/SearchLineEdit" to="." method="_on_search_line_edit_text_changed"]
+[connection signal="up_pressed" from="MenuPanelContainer/VBoxContainer/SearchLineEdit" to="." method="_on_search_line_edit_up_pressed"]
