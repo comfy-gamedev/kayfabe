@@ -1,5 +1,5 @@
 class_name DocumentMetadata
-extends RefCounted
+extends JsonResource
 
 @export var app_id: StringName
 @export var file_name: String

@@ -1,6 +1,6 @@
 extends PanelContainer
 
-const LAUNCHER_ROW = preload("res://framework/launcher_row.tscn")
+const LAUNCHER_ROW = preload("launcher_row.tscn")
 
 var desktops: Dictionary
 var rows: Dictionary
@@ -17,7 +17,7 @@ func _ready() -> void:
 				if not FileAccess.file_exists(metadata_file):
 					push_error("Desktop directory missing metadata file: ", d)
 					continue
-				var metadata: DesktopMetadata = ObjectJSON.parse_from_file(metadata_file, DesktopMetadata)
+				var metadata: DesktopMetadata = JsonResource.load_json(metadata_file, DesktopMetadata)
 				if not metadata:
 					push_error("Desktop metadata is invalid: ", d)
 					continue
@@ -75,8 +75,8 @@ func _on_row_name_edited(new_name: String, desktop_uuid: String) -> void:
 		if new_name == metadata.friendly_name:
 			return
 		metadata.friendly_name = new_name
-		var metadata_path = Framework.get_desktop_root(metadata.uuid).path_join(Framework.DESKTOP_METADATA_FILE)
-		var err = ObjectJSON.stringify_to_file(metadata, metadata_path)
+		var metadata_path = Desktop.get_root_dir(metadata.uuid).path_join(Framework.DESKTOP_METADATA_FILE)
+		var err = JsonResource.save_json(metadata, metadata_path)
 		if err != OK:
 			push_error("Failed to save metadata %s: %s" % [metadata_path, error_string(err)])
 			return

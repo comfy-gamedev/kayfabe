@@ -1,5 +1,5 @@
 class_name DocumentVersion
-extends RefCounted
+extends JsonResource
 
 @export var sha256: String
 @export var timestamp: int

@@ -1,4 +1,4 @@
 class_name DocumentHead
-extends RefCounted
+extends JsonResource
 
 @export var version: int

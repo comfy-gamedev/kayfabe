@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=7 format=3 uid="uid://k3xs7tj2j1ha"]
 
-[ext_resource type="SystemFont" uid="uid://bbs4shird5niq" path="res://framework/microsoft_sans_serif.tres" id="1_k51m7"]
+[ext_resource type="SystemFont" uid="uid://bbs4shird5niq" path="res://framework/launcher/microsoft_sans_serif.tres" id="1_k51m7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf5ju"]
 content_margin_left = 8.0

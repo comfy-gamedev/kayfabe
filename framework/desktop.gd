@@ -10,23 +10,22 @@ var windows: Array[AppWindow]
 var app_services: Dictionary
 var documents: Dictionary
 
-var _i: int = 0
-var _title: String
-
 @onready var window_root: Node = %WindowRoot
+
+static func get_root_dir(desktop_uuid: String) -> String:
+	return Framework.DESKTOPS_PATH.path_join(desktop_uuid)
 
 func _enter_tree() -> void:
 	current = self
+	get_window().files_dropped.connect(_on_files_dropped)
 
 func _exit_tree() -> void:
 	if current == self:
 		current = null
 	_save_thumbnail()
+	get_window().files_dropped.disconnect(_on_files_dropped)
 
 func _ready() -> void:
-	_title = get_window().title
-	RenderingServer.frame_pre_draw.connect(_on_frame_pre_draw)
-	
 	for app_key: StringName in AppManager.get_app_keys():
 		var manifest := AppManager.get_app_manifest(app_key)
 		var service_source = load(manifest.service_node_path)
@@ -49,7 +48,7 @@ func _ready() -> void:
 		documents[doc_uuid] = doc
 
 func get_documents_dir() -> String:
-	return Framework.get_desktop_root(metadata.uuid).path_join("documents")
+	return Desktop.get_root_dir(metadata.uuid).path_join("documents")
 
 func window_open(app_window: AppWindow) -> void:
 	if app_window.is_inside_tree():
@@ -105,6 +104,5 @@ func _save_thumbnail() -> void:
 	icon_img.resize(400, 400 * icon_img.get_height() / icon_img.get_width(), Image.INTERPOLATE_LANCZOS)
 	icon_img.save_png(metadata.get_icon_path())
 
-func _on_frame_pre_draw() -> void:
-	_i = (_i + 1) % 10
-	get_window().title = "%s - %s" % [_title, _i]
+func _on_files_dropped(files: PackedStringArray) -> void:
+	print(files)

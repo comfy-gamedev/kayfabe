@@ -16,7 +16,7 @@ var _cached_content: PackedByteArray
 static func create(app_id: StringName, desktop_uuid: String, file_name: String, archive_compression: Framework.CompressionMode = Framework.CompressionMode.GZIP) -> Document:
 	var uuid = UUID.v7()
 	
-	var document_dir = Framework.get_desktop_root(desktop_uuid).path_join(Framework.DOCUMENTS_DIR).path_join(uuid)
+	var document_dir = Desktop.get_root_dir(desktop_uuid).path_join(Framework.DOCUMENTS_DIR).path_join(uuid)
 	
 	if DirAccess.dir_exists_absolute(document_dir):
 		push_error("Document already exists: ", document_dir)
@@ -40,7 +40,7 @@ static func create(app_id: StringName, desktop_uuid: String, file_name: String, 
 	metadata.owner = UUID.ZERO
 	metadata.archive_compression = archive_compression
 	var metadata_path = document_dir.path_join(Framework.DOCUMENT_METADATA_FILE)
-	err = ObjectJSON.stringify_to_file(metadata, metadata_path)
+	err = JsonResource.save_json(metadata, metadata_path)
 	if err != OK:
 		push_error("Failed to save document metadata %s: %s" % [metadata_path, error_string(err)])
 		return null
@@ -48,7 +48,7 @@ static func create(app_id: StringName, desktop_uuid: String, file_name: String, 
 	var head = DocumentHead.new()
 	head.version_counter = 0
 	var head_path = document_dir.path_join(Framework.DOCUMENT_HEAD_FILE)
-	err = ObjectJSON.stringify_to_file(head, head_path)
+	err = JsonResource.save_json(head, head_path)
 	if err != OK:
 		push_error("Failed to save document head %s: %s" % [head_path, error_string(err)])
 		return null
@@ -61,20 +61,20 @@ static func create(app_id: StringName, desktop_uuid: String, file_name: String, 
 	return document
 
 static func open(desktop_uuid: String, uuid: String) -> Document:
-	var document_dir = Framework.get_desktop_root(desktop_uuid).path_join(Framework.DOCUMENTS_DIR).path_join(uuid)
+	var document_dir = Desktop.get_root_dir(desktop_uuid).path_join(Framework.DOCUMENTS_DIR).path_join(uuid)
 	
 	if not DirAccess.dir_exists_absolute(document_dir):
 		push_error("Document does not exist: ", document_dir)
 		return null
 	
 	var metadata_path = document_dir.path_join(Framework.DOCUMENT_METADATA_FILE)
-	var metadata: DocumentMetadata = ObjectJSON.parse_from_file(metadata_path, DocumentMetadata)
+	var metadata: DocumentMetadata = JsonResource.load_json(metadata_path, DocumentMetadata)
 	if not metadata:
 		push_error("Invalid or missing metadata: ", metadata_path)
 		return null
 	
 	var head_path = document_dir.path_join(Framework.DOCUMENT_HEAD_FILE)
-	var head: DocumentHead = ObjectJSON.parse_from_file(head_path, DocumentHead)
+	var head: DocumentHead = JsonResource.load_json(head_path, DocumentHead)
 	if not head:
 		push_error("Invalid or missing head: ", head_path)
 		return null
@@ -87,7 +87,7 @@ static func open(desktop_uuid: String, uuid: String) -> Document:
 	
 	if head.version != 0:
 		var version_path = document_dir.path_join(Framework.DOCUMENT_VERSIONS_DIR).path_join("%s.json" % [head.version])
-		var version: DocumentVersion = ObjectJSON.parse_from_file(version_path, DocumentVersion)
+		var version: DocumentVersion = JsonResource.load_json(version_path, DocumentVersion)
 		if not version:
 			push_error("Invalid or missing version: ", version_path)
 			return null
@@ -105,7 +105,7 @@ func set_name(v: String) -> void:
 	commit_version("NAME_CHANGED")
 
 func get_dir() -> String:
-	return Framework.get_desktop_root(desktop_uuid).path_join(Framework.DOCUMENTS_DIR).path_join(uuid)
+	return Desktop.get_root_dir(desktop_uuid).path_join(Framework.DOCUMENTS_DIR).path_join(uuid)
 
 func get_archive_dir() -> String:
 	return get_dir().path_join(Framework.DOCUMENT_ARCHIVE_DIR)
@@ -189,12 +189,12 @@ func commit_version(comment: String) -> void:
 	version.comment = comment
 	
 	var version_path = get_versions_dir().path_join("%s.json" % [head.version])
-	err = ObjectJSON.stringify_to_file(version, version_path)
+	err = JsonResource.save_json(version, version_path)
 	if err != OK:
 		push_error("Failed to save version file %s: %s" % [version_path, error_string(err)])
 	
 	var head_path = get_head_file_path()
-	err = ObjectJSON.stringify_to_file(head, head_path)
+	err = JsonResource.save_json(head, head_path)
 	if err != OK:
 		push_error("Failed to save document head %s: %s" % [head_path, error_string(err)])
 	

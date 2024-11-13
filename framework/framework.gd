@@ -22,6 +22,3 @@ enum CompressionMode {
 	UNCOMPRESSED,
 	GZIP,
 }
-
-static func get_desktop_root(desktop_uuid: String) -> String:
-	return DESKTOPS_PATH.path_join(desktop_uuid)
