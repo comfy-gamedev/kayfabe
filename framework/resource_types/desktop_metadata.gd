@@ -3,8 +3,6 @@ extends JsonResource
 
 signal changed()
 
-const SUBDIRS = ["documents"]
-
 @export var uuid: String = UUID.ZERO: set = set_uuid
 @export var friendly_name: String = "": set = set_friendly_name
 @export var installed_apps: PackedStringArray = []
@@ -18,7 +16,7 @@ func initialize_directory() -> void:
 	if not UUID.is_valid(uuid):
 		push_error("Invalid UUID.")
 		return
-	var dir = Desktop.get_root_dir(uuid)
+	var dir = Framework.get_desktop_dir(uuid)
 	if DirAccess.dir_exists_absolute(dir):
 		push_error("Directory already exists: ", dir)
 		return
@@ -26,13 +24,14 @@ func initialize_directory() -> void:
 	if err != OK:
 		push_error("Failed to create directory %s: %s" % [dir, error_string(err)])
 		return
-	var metadata_path = dir.path_join(Framework.DESKTOP_METADATA_FILE)
+	
+	var metadata_path = Framework.get_desktop_metadata_file(uuid)
 	err = JsonResource.save_json(self, metadata_path)
 	if err != OK:
 		push_error("Failed to save metadata %s: %s" % [metadata_path, error_string(err)])
 		return
 	
-	for s in SUBDIRS:
+	for s in [Framework.DESKTOP_ARCHIVE_DIR, Framework.DESKTOP_DOCUMENTS_DIR]:
 		var d = dir.path_join(s)
 		err = DirAccess.make_dir_absolute(d)
 		if err != OK:
@@ -50,13 +49,3 @@ func set_friendly_name(v: String) -> void:
 	if friendly_name == v: return
 	friendly_name = v
 	changed.emit()
-
-func get_icon_path() -> String:
-	return Desktop.get_root_dir(uuid).path_join("thumbnail.png")
-
-func get_icon() -> Texture2D:
-	var icon_path = get_icon_path()
-	if not FileAccess.file_exists(icon_path):
-		push_warning("No icon found: ", icon_path)
-		return null
-	return ImageTexture.create_from_image(Image.load_from_file(icon_path))

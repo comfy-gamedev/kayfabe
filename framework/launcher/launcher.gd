@@ -29,9 +29,14 @@ func _ready() -> void:
 func _add_row(metadata: DesktopMetadata, is_new: bool = false) -> void:
 	desktops[metadata.uuid] = metadata
 	
+	var thumbnail_path = Framework.get_desktop_thumbnail_file(metadata.uuid)
+	var thumbnail: Texture2D
+	if FileAccess.file_exists(thumbnail_path):
+		thumbnail = ImageTexture.create_from_image(Image.load_from_file(thumbnail_path))
+
 	var row = LAUNCHER_ROW.instantiate()
 	desktop_rows.add_child(row)
-	row.icon_texture_rect.texture = metadata.get_icon()
+	row.icon_texture_rect.texture = thumbnail
 	row.name_label.text = metadata.friendly_name
 	row.activated.connect(_on_row_activated.bind(metadata.uuid))
 	row.name_edited.connect(_on_row_name_edited.bind(metadata.uuid))
@@ -75,7 +80,7 @@ func _on_row_name_edited(new_name: String, desktop_uuid: String) -> void:
 		if new_name == metadata.friendly_name:
 			return
 		metadata.friendly_name = new_name
-		var metadata_path = Desktop.get_root_dir(metadata.uuid).path_join(Framework.DESKTOP_METADATA_FILE)
+		var metadata_path = Framework.get_desktop_metadata_file(metadata.uuid)
 		var err = JsonResource.save_json(metadata, metadata_path)
 		if err != OK:
 			push_error("Failed to save metadata %s: %s" % [metadata_path, error_string(err)])

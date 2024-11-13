@@ -6,3 +6,4 @@ extends JsonResource
 @export var permissions: Dictionary
 @export var name: String
 @export var comment: String
+@export var tags: PackedStringArray

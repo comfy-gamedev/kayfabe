@@ -10,10 +10,10 @@ var windows: Array[AppWindow]
 var app_services: Dictionary
 var documents: Dictionary
 
-@onready var window_root: Node = %WindowRoot
+var uuid: StringName:
+	get: return metadata.uuid
 
-static func get_root_dir(desktop_uuid: String) -> String:
-	return Framework.DESKTOPS_PATH.path_join(desktop_uuid)
+@onready var window_root: Node = %WindowRoot
 
 func _enter_tree() -> void:
 	current = self
@@ -37,7 +37,7 @@ func _ready() -> void:
 		app_services[app_key] = service
 		add_child(service)
 	
-	for doc_uuid in DirAccess.get_directories_at(get_documents_dir()):
+	for doc_uuid in DirAccess.get_directories_at(Framework.get_desktop_documents_dir(uuid)):
 		if not UUID.is_valid(doc_uuid):
 			push_error("Invalid document directory: ", doc_uuid)
 			continue
@@ -46,9 +46,6 @@ func _ready() -> void:
 			push_error("Invalid document: ", doc_uuid)
 			continue
 		documents[doc_uuid] = doc
-
-func get_documents_dir() -> String:
-	return Desktop.get_root_dir(metadata.uuid).path_join("documents")
 
 func window_open(app_window: AppWindow) -> void:
 	if app_window.is_inside_tree():
@@ -102,7 +99,24 @@ func _save_thumbnail() -> void:
 		return
 	var icon_img = get_viewport().get_texture().get_image()
 	icon_img.resize(400, 400 * icon_img.get_height() / icon_img.get_width(), Image.INTERPOLATE_LANCZOS)
-	icon_img.save_png(metadata.get_icon_path())
+	icon_img.save_png(Framework.get_desktop_thumbnail_file(uuid))
 
 func _on_files_dropped(files: PackedStringArray) -> void:
-	print(files)
+	for f in files:
+		if DirAccess.dir_exists_absolute(f):
+			push_error("Cannot import directory. ", f)
+			continue
+		_import_file(f)
+
+func _import_file(path: String) -> void:
+	var src = FileAccess.get_file_as_bytes(path)
+	var err = FileAccess.get_open_error()
+	if err != OK:
+		push_error("Failed to import %s: %s" % [path, error_string(err)])
+		return
+	var doc = Document.create(uuid, path.get_file())
+	var dest = doc.open_file(FileAccess.ModeFlags.WRITE)
+	dest.store_buffer(src)
+	dest.close()
+	doc.tags.append("_imported")
+	doc.commit_version("IMPORT")
