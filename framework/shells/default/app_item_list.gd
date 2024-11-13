@@ -119,7 +119,7 @@ func _sort_children() -> void:
 			item.size = Vector2(col_width, _row_height)
 
 func _draw() -> void:
-	if _theme_focus_style and _is_filtering:
+	if _theme_focus_style and _is_filtering and focused_child_index < _filtered_items.size():
 		var item = _filtered_items[focused_child_index] as AppItemListItem
 		_theme_focus_style.draw(get_canvas_item(), item.get_rect())
 

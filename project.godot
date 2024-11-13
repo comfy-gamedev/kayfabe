@@ -30,6 +30,10 @@ RenderTracker="res://framework/autoload/render_tracker.gd"
 window/stretch/aspect="ignore"
 window/stretch/scale=2.0
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/swatch_palette/plugin.cfg")
+
 [gui]
 
 theme/custom="res://themes/cyberfire/theme.tres"
