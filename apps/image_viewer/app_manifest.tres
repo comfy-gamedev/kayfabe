@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="AppManifest" load_steps=2 format=3 uid="uid://dntvsknvexx07"]
+
+[ext_resource type="Script" path="res://framework/resource_types/app_manifest.gd" id="1_c5due"]
+
+[resource]
+script = ExtResource("1_c5due")
+name = "Image Viewer"
+service_node_path = "res://apps/image_viewer/service.gd"

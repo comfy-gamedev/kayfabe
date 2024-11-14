@@ -1,8 +1,7 @@
-class_name AppService
-extends Node
+extends AppService
 
-var app_id: StringName
-var app_manifest: AppManifest
+func _ready() -> void:
+	pass
 
 func _icon_activated() -> void:
 	push_error("_icon_activated not implemented for app %s" % app_manifest.name)

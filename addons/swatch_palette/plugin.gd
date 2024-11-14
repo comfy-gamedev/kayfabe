@@ -31,6 +31,7 @@ func _enter_tree() -> void:
 	load_dialog.file_mode = EditorFileDialog.FILE_MODE_OPEN_FILE
 	load_dialog.access = EditorFileDialog.ACCESS_FILESYSTEM
 	load_dialog.file_selected.connect(_on_load_dialog_file_selected)
+	load_dialog.add_filter("*.tres, *.res")
 	add_child(load_dialog)
 	
 	popup = PopupMenu.new()
@@ -74,6 +75,8 @@ func _on_save_dialog_file_selected(path: String) -> void:
 	palette.colors = color_picker_presets
 	palette.resource_path = path
 	ResourceSaver.save(palette, path)
+	
+	get_editor_interface().get_resource_filesystem().scan()
 
 func _on_load_dialog_file_selected(path: String) -> void:
 	_current_palette_file = path

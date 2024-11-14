@@ -56,3 +56,7 @@ static func get_document_metadata_file(desktop_uuid: StringName, document_uuid: 
 
 static func get_document_head_file(desktop_uuid: StringName, document_uuid: StringName) -> String:
 	return get_document_dir(desktop_uuid, document_uuid).path_join(DOCUMENT_HEAD_FILE)
+
+
+static func get_document_default_thumbnail() -> Texture2D:
+	return load("res://framework/default_document_thumbnail.png")

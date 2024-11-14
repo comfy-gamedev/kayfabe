@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwpm2d2vick0o"]
+
+[ext_resource type="Script" path="res://apps/image_viewer/viewer.gd" id="1_xdv2t"]
+
+[sub_resource type="Gradient" id="Gradient_hck6i"]
+colors = PackedColorArray(0.106436, 0.106436, 0.106436, 1, 0.162353, 0.162353, 0.162353, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_oi5x3"]
+frequency = 0.133
+fractal_octaves = 3
+fractal_gain = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_llgbm"]
+color_ramp = SubResource("Gradient_hck6i")
+noise = SubResource("FastNoiseLite_oi5x3")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7ixmi"]
+texture = SubResource("NoiseTexture2D_llgbm")
+
+[node name="Viewer" type="Container"]
+offset_right = 232.0
+offset_bottom = 210.0
+mouse_filter = 0
+theme_type_variation = &"AppWindow"
+script = ExtResource("1_xdv2t")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_7ixmi")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5

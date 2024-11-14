@@ -1,6 +1,8 @@
 class_name Document
 extends RefCounted
 
+signal changed()
+
 var desktop_uuid: String
 var uuid: String
 var metadata: DocumentMetadata
@@ -14,6 +16,7 @@ var _cached_tick_msec: int
 var _cached_modified_time: int
 var _cached_content: PackedByteArray
 var _cached_sha256: String = ""
+var _cached_thumbnail: Texture2D
 
 static func create(desktop_uuid: String, file_name: String, archive_compression: Framework.CompressionMode = Framework.CompressionMode.GZIP) -> Document:
 	var uuid = UUID.v7()
@@ -138,7 +141,8 @@ func get_sha256() -> String:
 	if not _cached_sha256:
 		var hash = HashingContext.new()
 		hash.start(HashingContext.HASH_SHA256)
-		hash.update(bytes)
+		if bytes:
+			hash.update(bytes)
 		_cached_sha256 = hash.finish().hex_encode()
 	
 	return _cached_sha256
@@ -211,11 +215,20 @@ func commit_version(comment: String) -> Error:
 	
 	return OK
 
+func get_thumbnail() -> Texture2D:
+	_update_cache()
+	
+	if not _cached_thumbnail:
+		_cached_thumbnail = Framework.get_document_default_thumbnail()
+	
+	return _cached_thumbnail
+
 func _clear_cache() -> void:
 	_cached = false
 	_cached_tick_msec = 0
 	_cached_content.clear()
 	_cached_sha256 = ""
+	_cached_thumbnail = null
 
 func _update_cache() -> Error:
 	var file_path = get_working_file_path()

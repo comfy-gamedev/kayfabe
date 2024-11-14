@@ -86,6 +86,33 @@ func window_bring_to_front(app_window: AppWindow) -> void:
 	
 	_update_windows_z_index()
 
+func app_get_service(app_id: StringName) -> AppService:
+	var app = app_services.get(app_id)
+	if not app:
+		push_error("Invalid app_id: ", app_id)
+		return null
+	return app
+
+func app_get_name(app_id: StringName) -> String:
+	var app = app_services.get(app_id)
+	if not app:
+		push_error("Invalid app_id: ", app_id)
+		return ""
+	return app.name
+
+func document_get_apps(document_uuid: String) -> PackedStringArray:
+	var doc = documents.get(document_uuid)
+	if not doc:
+		push_error("Unknown document: ", document_uuid)
+		return PackedStringArray()
+	
+	var results: PackedStringArray
+	for app_id: StringName in app_services:
+		if app_services[app_id]._can_open_document(doc):
+			results.append(app_id)
+	
+	return results
+
 func _update_windows_z_index() -> void:
 	for i in windows.size():
 		var canvas_layer = windows[i].get_parent() as CanvasLayer
