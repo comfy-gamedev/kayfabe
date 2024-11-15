@@ -236,6 +236,7 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+corner_detail = 1
 shadow_color = Color(0.137255, 0.137255, 0.168627, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kqt6e"]
@@ -251,6 +252,7 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+corner_detail = 1
 shadow_color = Color(0.137255, 0.137255, 0.168627, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_46aev"]
@@ -266,6 +268,7 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+corner_detail = 1
 shadow_color = Color(0.137255, 0.137255, 0.168627, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qjskf"]
@@ -281,6 +284,7 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+corner_detail = 1
 shadow_color = Color(0.137255, 0.137255, 0.168627, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_clvjc"]
@@ -298,6 +302,7 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+corner_detail = 1
 shadow_color = Color(0.137255, 0.137255, 0.168627, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xg0ua"]
@@ -313,6 +318,7 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+corner_detail = 1
 shadow_color = Color(0.137255, 0.137255, 0.168627, 1)
 shadow_size = 1
 shadow_offset = Vector2(0, 2)
@@ -325,12 +331,13 @@ content_margin_left = 2.0
 content_margin_top = 2.0
 content_margin_right = 2.0
 content_margin_bottom = 2.0
-bg_color = Color(0.156863, 0.356863, 0.466667, 1)
+bg_color = Color(0.0431373, 0.584314, 0.623529, 1)
 border_color = Color(0.156863, 0.356863, 0.466667, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vhxs1"]
 content_margin_left = 4.0
@@ -340,6 +347,7 @@ content_margin_bottom = 2.0
 bg_color = Color(0.0235294, 0.811765, 0.807843, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
+corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wqg4j"]
 content_margin_left = 4.0
@@ -349,8 +357,19 @@ content_margin_bottom = 2.0
 bg_color = Color(0.552941, 0.0823529, 0.368627, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
+corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nfckf"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+bg_color = Color(0.0431373, 0.584314, 0.623529, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cbv8v"]
 content_margin_left = 4.0
 content_margin_top = 2.0
 content_margin_right = 4.0
@@ -358,21 +377,14 @@ content_margin_bottom = 2.0
 bg_color = Color(0.156863, 0.356863, 0.466667, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cbv8v"]
-content_margin_left = 4.0
-content_margin_top = 2.0
-content_margin_right = 4.0
-content_margin_bottom = 2.0
-bg_color = Color(0.160784, 0.164706, 0.313726, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
+corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2m3y"]
 content_margin_bottom = 8.0
 bg_color = Color(0.0235294, 0.811765, 0.807843, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
+corner_detail = 1
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e34tb"]
 
@@ -389,6 +401,7 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+corner_detail = 1
 shadow_color = Color(0.137255, 0.137255, 0.168627, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ur8ep"]
@@ -404,6 +417,7 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+corner_detail = 1
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_npu5v"]
 texture = ExtResource("2_83hrn")
@@ -514,8 +528,8 @@ TabContainer/colors/drop_mark_color = Color(0.827451, 0.0862745, 0.486275, 1)
 TabContainer/colors/font_disabled_color = Color(0.160784, 0.164706, 0.313726, 1)
 TabContainer/colors/font_hovered_color = Color(0.92549, 0.92549, 0.929412, 1)
 TabContainer/colors/font_outline_color = Color(0, 0, 0, 1)
-TabContainer/colors/font_selected_color = Color(0.0235294, 0.811765, 0.807843, 1)
-TabContainer/colors/font_unselected_color = Color(0.92549, 0.92549, 0.929412, 1)
+TabContainer/colors/font_selected_color = Color(0.92549, 0.92549, 0.929412, 1)
+TabContainer/colors/font_unselected_color = Color(0.0235294, 0.811765, 0.807843, 1)
 TabContainer/styles/panel = SubResource("StyleBoxFlat_bm8xy")
 TabContainer/styles/tab_disabled = SubResource("StyleBoxFlat_vhxs1")
 TabContainer/styles/tab_focus = null
