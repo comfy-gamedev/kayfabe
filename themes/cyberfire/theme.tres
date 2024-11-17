@@ -345,16 +345,16 @@ shadow_offset = Vector2(0, 2)
 bg_color = Color(0.0431373, 0.584314, 0.623529, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_quxh5"]
-content_margin_left = 4.0
+content_margin_left = 6.0
 content_margin_top = 4.0
-content_margin_right = 4.0
+content_margin_right = 6.0
 content_margin_bottom = 4.0
 texture = ExtResource("2_83hrn")
 texture_margin_left = 8.0
 texture_margin_top = 8.0
 texture_margin_right = 8.0
 texture_margin_bottom = 8.0
-region_rect = Rect2(0, 109, 32, 19)
+region_rect = Rect2(0, 109, 24, 19)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0oppb"]
 content_margin_left = 4.0
