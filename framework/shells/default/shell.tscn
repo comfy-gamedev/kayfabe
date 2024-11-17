@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6twsln376grv"]
+[gd_scene load_steps=6 format=3 uid="uid://b6twsln376grv"]
 
 [ext_resource type="Script" path="res://framework/shells/default/shell.gd" id="1_qlls7"]
 [ext_resource type="Script" path="res://framework/shells/default/app_item_list.gd" id="2_nwivk"]
+[ext_resource type="Texture2D" uid="uid://mh48osisb557" path="res://themes/cyberfire/cyberfire_icons.png" id="2_pdc4m"]
 [ext_resource type="Script" path="res://framework/shells/default/search_line_edit.gd" id="3_82wmq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eww1c"]
+atlas = ExtResource("2_pdc4m")
+region = Rect2(128, 48, 8, 8)
 
 [node name="Shell" type="Control"]
 layout_mode = 3
@@ -23,16 +28,24 @@ anchor_bottom = 1.0
 offset_top = -32.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_type_variation = &"ShellBarPanelContainer"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ShellBar"]
 layout_mode = 2
 
 [node name="MenuButton" type="Button" parent="ShellBar/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
+theme_type_variation = &"ShellButton"
 toggle_mode = true
-text = "🍔Menu"
+icon = SubResource("AtlasTexture_eww1c")
+icon_alignment = 1
+expand_icon = true
+
+[node name="VSeparator" type="VSeparator" parent="ShellBar/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 3
 
 [node name="MenuPanelContainer" type="PanelContainer" parent="."]
 unique_name_in_owner = true
