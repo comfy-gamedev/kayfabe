@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=60 format=3 uid="uid://bvq77hnbdaw8x"]
+[gd_resource type="Theme" load_steps=61 format=3 uid="uid://bvq77hnbdaw8x"]
 
 [ext_resource type="Texture2D" uid="uid://mh48osisb557" path="res://themes/cyberfire/cyberfire_icons.png" id="2_83hrn"]
 [ext_resource type="SystemFont" uid="uid://12by81v6gs72" path="res://themes/cyberfire/microsoft_sans_serif.tres" id="7_508xm"]
@@ -404,9 +404,22 @@ texture_margin_right = 6.0
 texture_margin_bottom = 6.0
 region_rect = Rect2(81, 1, 14, 14)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kqk5y"]
+content_margin_left = 8.0
+content_margin_top = 13.0
+content_margin_right = 8.0
+content_margin_bottom = 3.0
+texture = ExtResource("2_83hrn")
+texture_margin_left = 6.0
+texture_margin_top = 13.0
+texture_margin_right = 6.0
+texture_margin_bottom = 1.0
+expand_margin_bottom = 4.0
+region_rect = Rect2(0, 88, 24, 20)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bm8xy"]
 content_margin_left = 2.0
-content_margin_top = 2.0
+content_margin_top = 4.0
 content_margin_right = 2.0
 content_margin_bottom = 2.0
 bg_color = Color(0.0431373, 0.584314, 0.623529, 1)
@@ -614,6 +627,8 @@ ShellButton/styles/hover = SubResource("StyleBoxTexture_k6m7x")
 ShellButton/styles/hover_pressed = SubResource("StyleBoxTexture_k6m7x")
 ShellButton/styles/normal = SubResource("StyleBoxTexture_nc5il")
 ShellButton/styles/pressed = SubResource("StyleBoxTexture_of0bo")
+ShellMenuPanelContainer/base_type = &"PanelContainer"
+ShellMenuPanelContainer/styles/panel = SubResource("StyleBoxTexture_kqk5y")
 TabContainer/colors/drop_mark_color = Color(0.827451, 0.0862745, 0.486275, 1)
 TabContainer/colors/font_disabled_color = Color(0.160784, 0.164706, 0.313726, 1)
 TabContainer/colors/font_hovered_color = Color(0.92549, 0.92549, 0.929412, 1)

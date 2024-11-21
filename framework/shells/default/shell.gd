@@ -1,11 +1,12 @@
 extends Control
 
 @onready var desktop: Desktop = Desktop.current
+@onready var desktop_button: Button = %DesktopButton
 @onready var menu_button: Button = %MenuButton
-@onready var desktop_name_label: Label = %DesktopNameLabel
 @onready var app_item_list = %AppItemList
 @onready var search_line_edit: LineEdit = %SearchLineEdit
 @onready var menu_panel_container: PanelContainer = %MenuPanelContainer
+@onready var desktop_panel_container: PanelContainer = %DesktopPanelContainer
 
 var _score_cache: Dictionary
 
@@ -54,6 +55,12 @@ func _score_func(app_key: StringName) -> float:
 	_score_cache[[pat, str]] = score
 	
 	return score
+
+func _on_desktop_button_pressed() -> void:
+	if desktop_button.button_pressed:
+		desktop_panel_container.visible = true
+	else:
+		desktop_panel_container.visible = false
 
 func _on_menu_button_pressed() -> void:
 	if menu_button.button_pressed:
