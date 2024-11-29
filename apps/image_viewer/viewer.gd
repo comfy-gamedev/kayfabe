@@ -13,10 +13,10 @@ func _ready() -> void:
 func set_document(d: Document) -> void:
 	if document == d: return
 	if document:
-		document.changed.disconnect(_on_document_changed)
+		document.version_changed.disconnect(_on_document_version_changed)
 	document = d
 	if document:
-		document.changed.connect(_on_document_changed)
+		document.version_changed.connect(_on_document_version_changed)
 	_reload()
 
 func _reload() -> void:
@@ -26,8 +26,9 @@ func _reload() -> void:
 	else:
 		if not _texture:
 			_texture = ImageTexture.new()
-		_texture.set_image(Image.load_from_file(document.get_working_file_path()))
+		var path = await document.get_working_file_path_async()
+		_texture.set_image(Image.load_from_file(path))
 		texture_rect.texture = _texture
 
-func _on_document_changed() -> void:
+func _on_document_version_changed() -> void:
 	_reload()

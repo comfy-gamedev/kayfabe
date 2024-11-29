@@ -9,7 +9,7 @@ func _ready() -> void:
 	_update_icon()
 	theme_changed.connect(_refresh_theme)
 
-func _gui_input(event: InputEvent) -> void:
+func _gui_input(_event: InputEvent) -> void:
 	if Engine.is_editor_hint() and Engine.get_singleton("EditorInterface").get_edited_scene_root().is_ancestor_of(self):
 		return
 	_update_icon()

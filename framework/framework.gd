@@ -1,7 +1,7 @@
 class_name Framework
 extends RefCounted
 
-const DESKTOPS_PATH = "user://desktops"
+const DESKTOPS_PATH = "desktops"
 
 const DESKTOP_ARCHIVE_DIR = "archive"
 const DESKTOP_DOCUMENTS_DIR = "documents"
@@ -27,7 +27,7 @@ enum CompressionMode {
 
 
 static func get_desktop_dir(desktop_uuid: StringName) -> String:
-	return DESKTOPS_PATH.path_join(desktop_uuid)
+	return PlayerProfileManager.profile_root.path_join(DESKTOPS_PATH).path_join(desktop_uuid)
 
 static func get_desktop_archive_dir(desktop_uuid: StringName) -> String:
 	return get_desktop_dir(desktop_uuid).path_join(DESKTOP_ARCHIVE_DIR)
@@ -56,6 +56,9 @@ static func get_document_metadata_file(desktop_uuid: StringName, document_uuid: 
 
 static func get_document_head_file(desktop_uuid: StringName, document_uuid: StringName) -> String:
 	return get_document_dir(desktop_uuid, document_uuid).path_join(DOCUMENT_HEAD_FILE)
+
+static func get_document_version_file(desktop_uuid: StringName, document_uuid: StringName, version: int) -> String:
+	return get_document_versions_dir(desktop_uuid, document_uuid).path_join("%s.json" % [version])
 
 
 static func get_document_default_thumbnail() -> Texture2D:

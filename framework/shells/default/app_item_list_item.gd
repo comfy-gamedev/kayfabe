@@ -36,7 +36,7 @@ func _ready() -> void:
 	theme_changed.connect(_update_theme_cache)
 
 func _get_minimum_size() -> Vector2:
-	var text_height = _theme_font.get_height(_theme_font_size) if _theme_font else 0
+	var text_height := _theme_font.get_height(_theme_font_size) if _theme_font else 0.0
 	match layout:
 		Layout.GRID:
 			return Vector2(icon_size.x, icon_size.y + text_height)
@@ -63,7 +63,7 @@ func _draw() -> void:
 		Layout.ROW:
 			if app_manifest.icon:
 				draw_texture_rect(app_manifest.icon, Rect2(Vector2(0, size.y / 2 - icon_size.y / 2), icon_size), false)
-			var text_height = _theme_font.get_height(_theme_font_size) if _theme_font else 0
+			var text_height := _theme_font.get_height(_theme_font_size) if _theme_font else 0.0
 			draw_string(
 				_theme_font,
 				Vector2(icon_size.x, size.y / 2 + text_height / 2),

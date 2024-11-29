@@ -50,14 +50,14 @@ func get_content_rect() -> Rect2:
 		content_panel_container.position + style.get_offset(),
 		content_panel_container.size - style.get_minimum_size())
 
-func add_user_button(id: StringName, tooltip_text: String = "", normal_icon: Texture2D = null, disabled_icon: Texture2D = null, hover_icon: Texture2D = null, pressed_icon: Texture2D = null) -> void:
+func add_user_button(id: StringName, p_tooltip_text: String = "", normal_icon: Texture2D = null, disabled_icon: Texture2D = null, hover_icon: Texture2D = null, pressed_icon: Texture2D = null) -> void:
 	if id in _user_buttons:
 		push_error("User button already exists with id %s" % id)
 		return
 	
 	var button = AppWindowUserButton.new()
 	button.name = "AppWindowUserButton_%s" % id
-	button.tooltip_text = tooltip_text
+	button.tooltip_text = p_tooltip_text
 	button.size_flags_vertical = SIZE_SHRINK_CENTER
 	if normal_icon:
 		button.add_theme_icon_override(ICON_NAMES[Icon.NORMAL], normal_icon)
@@ -81,12 +81,20 @@ func remove_user_button(id: StringName) -> void:
 	_user_buttons.erase(id)
 	_update_button_themes()
 
-func set_button_visible(id: StringName, visible: bool) -> void:
+func set_button_visible(id: StringName, p_visible: bool) -> void:
 	var button: AppWindowUserButton = _user_buttons.get(id) as AppWindowUserButton
 	if button == null:
 		push_error("Unknown user button id %s" % id)
 		return
-	button.visible = visible
+	button.visible = p_visible
+	_update_button_themes()
+
+func set_button_disabled(id: StringName, disabled: bool) -> void:
+	var button: AppWindowUserButton = _user_buttons.get(id) as AppWindowUserButton
+	if button == null:
+		push_error("Unknown user button id %s" % id)
+		return
+	button.disabled = disabled
 	_update_button_themes()
 
 func set_button_icon(id: StringName, icon_type: Icon, icon: Texture2D) -> void:

@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Kayfabe"
 run/main_scene="res://framework/launcher/launcher.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 run/low_processor_mode=true
 config/icon="res://icon.svg"
 
@@ -22,8 +22,14 @@ general/text_to_speech=true
 
 [autoload]
 
+ArgParse="*res://framework/autoload/arg_parse.gd"
+PlayerProfileManager="*res://framework/autoload/player_profile_manager.gd"
 AppManager="*res://framework/autoload/app_manager.gd"
 RenderTracker="res://framework/autoload/render_tracker.gd"
+
+[debug]
+
+gdscript/warnings/missing_tool=0
 
 [display]
 

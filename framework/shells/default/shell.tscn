@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://b6twsln376grv"]
+[gd_scene load_steps=11 format=3 uid="uid://b6twsln376grv"]
 
-[ext_resource type="Script" path="res://framework/shells/default/shell.gd" id="1_qlls7"]
-[ext_resource type="Script" path="res://framework/shells/default/app_item_list.gd" id="2_nwivk"]
+[ext_resource type="Script" uid="uid://bv1f6xupdnd3w" path="res://framework/shells/default/shell.gd" id="1_qlls7"]
+[ext_resource type="Script" uid="uid://bwttgystohi7o" path="res://framework/shells/default/app_item_list.gd" id="2_nwivk"]
 [ext_resource type="Texture2D" uid="uid://mh48osisb557" path="res://themes/cyberfire/cyberfire_icons.png" id="2_pdc4m"]
-[ext_resource type="Script" path="res://framework/shells/default/search_line_edit.gd" id="3_82wmq"]
-[ext_resource type="Script" path="res://framework/shells/default/file_item_list.gd" id="4_hoiib"]
-[ext_resource type="Script" path="res://framework/shells/default/settings_item_list.gd" id="5_6w2ko"]
+[ext_resource type="PackedScene" path="res://framework/shells/default/send_recv_icon.tscn" id="2_ww856"]
+[ext_resource type="Script" uid="uid://bsk5525ny6cuu" path="res://framework/shells/default/search_line_edit.gd" id="3_82wmq"]
+[ext_resource type="Script" uid="uid://dj3dbs6vq5jwh" path="res://framework/shells/default/file_item_list.gd" id="4_hoiib"]
+[ext_resource type="Script" uid="uid://5jt0ny5rpjmy" path="res://framework/shells/default/settings_item_list.gd" id="5_6w2ko"]
+[ext_resource type="PackedScene" uid="uid://c4kcbhhjvkdp2" path="res://framework/shells/default/network_panel_container.tscn" id="6_j6ciu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2hlin"]
 atlas = ExtResource("2_pdc4m")
@@ -97,9 +99,19 @@ clear_button_enabled = true
 select_all_on_focus = true
 script = ExtResource("3_82wmq")
 
+[node name="Spacer" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="NetworkPanelContainer" parent="HBoxContainer" instance=ExtResource("6_j6ciu")]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="ShellBar" type="PanelContainer" parent="."]
 layout_mode = 2
 theme_type_variation = &"ShellBarPanelContainer"
+metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ShellBar"]
 layout_mode = 2
@@ -128,9 +140,30 @@ expand_icon = true
 layout_mode = 2
 theme_override_constants/separation = 3
 
+[node name="HBoxContainer" type="HBoxContainer" parent="ShellBar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HiddenServiceIcons" type="HBoxContainer" parent="ShellBar/HBoxContainer"]
+layout_mode = 2
+
+[node name="ShellServiceIcons" type="HBoxContainer" parent="ShellBar/HBoxContainer"]
+layout_mode = 2
+
+[node name="SendRecvIcon" parent="ShellBar/HBoxContainer/ShellServiceIcons" instance=ExtResource("2_ww856")]
+layout_mode = 2
+
+[node name="NetworkButton" type="Button" parent="ShellBar/HBoxContainer/ShellServiceIcons"]
+layout_mode = 2
+toggle_mode = true
+text = "📡"
+
 [connection signal="app_clicked" from="HBoxContainer/MenuPanelContainer/VBoxContainer/Apps/AppItemList" to="." method="_on_app_item_list_app_clicked"]
 [connection signal="down_pressed" from="HBoxContainer/MenuPanelContainer/SearchLineEdit" to="." method="_on_search_line_edit_down_pressed"]
 [connection signal="text_changed" from="HBoxContainer/MenuPanelContainer/SearchLineEdit" to="." method="_on_search_line_edit_text_changed"]
 [connection signal="up_pressed" from="HBoxContainer/MenuPanelContainer/SearchLineEdit" to="." method="_on_search_line_edit_up_pressed"]
+[connection signal="start_server_pressed" from="HBoxContainer/NetworkPanelContainer" to="." method="_on_network_panel_container_start_server_pressed"]
+[connection signal="stop_server_pressed" from="HBoxContainer/NetworkPanelContainer" to="." method="_on_network_panel_container_stop_server_pressed"]
 [connection signal="pressed" from="ShellBar/HBoxContainer/DesktopButton" to="." method="_on_desktop_button_pressed"]
 [connection signal="pressed" from="ShellBar/HBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="toggled" from="ShellBar/HBoxContainer/ShellServiceIcons/NetworkButton" to="." method="_on_network_button_toggled"]

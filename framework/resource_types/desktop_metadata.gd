@@ -37,7 +37,7 @@ func initialize_directory() -> void:
 		if err != OK:
 			push_error("Failed to create subdirectory %s: %s" % [d, error_string(err)])
 
-func set_uuid(v: String) -> void:
+func set_uuid(v: StringName) -> void:
 	if uuid == v: return
 	if v != "" and not UUID.is_valid(v):
 		push_warning("Invalid UUID.")

@@ -8,7 +8,9 @@ func _ready() -> void:
 	RenderingServer.frame_pre_draw.connect(_on_frame_pre_draw)
 
 func _on_frame_pre_draw() -> void:
-	var title = get_window().title
+	var window = get_window()
+	if not window: return
+	var title = window.title
 	for c in CHARS:
 		if title.begins_with(c):
 			title = title.trim_prefix(c)

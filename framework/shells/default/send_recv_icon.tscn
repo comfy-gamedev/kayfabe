@@ -1,0 +1,84 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6piwmude7tao"]
+
+[ext_resource type="Script" path="res://framework/shells/default/send_recv_icon.gd" id="1_3rnj7"]
+[ext_resource type="Texture2D" uid="uid://b8370e2xw1hmq" path="res://framework/shells/default/send_recv_offline.tres" id="2_3243c"]
+
+[sub_resource type="SystemFont" id="SystemFont_12mne"]
+font_names = PackedStringArray("Microsoft Sans Serif")
+hinting = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_ww856"]
+font = SubResource("SystemFont_12mne")
+font_size = 8
+
+[node name="SendRecvIcon" type="MarginContainer"]
+custom_minimum_size = Vector2(32, 32)
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("1_3rnj7")
+
+[node name="Base" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_3243c")
+
+[node name="SendOverlay" type="TextureRect" parent="Base"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RecvOverlay" type="TextureRect" parent="Base"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="SendContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/SendContainer"]
+layout_mode = 2
+text = "S"
+label_settings = SubResource("LabelSettings_ww856")
+vertical_alignment = 1
+
+[node name="SendLabel" type="Label" parent="VBoxContainer/SendContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1024"
+label_settings = SubResource("LabelSettings_ww856")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="RecvContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/RecvContainer"]
+layout_mode = 2
+text = "R"
+label_settings = SubResource("LabelSettings_ww856")
+vertical_alignment = 1
+
+[node name="RecvLabel" type="Label" parent="VBoxContainer/RecvContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1024"
+label_settings = SubResource("LabelSettings_ww856")
+horizontal_alignment = 2
+vertical_alignment = 1

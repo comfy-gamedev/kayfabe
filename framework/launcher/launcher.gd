@@ -5,15 +5,18 @@ const LAUNCHER_ROW = preload("launcher_row.tscn")
 var desktops: Dictionary
 var rows: Dictionary
 var new_row_uuid: String
+var desktops_path: String
 
 @onready var desktop_scroll_container: ScrollContainer = %DesktopScrollContainer
 @onready var desktop_rows: VBoxContainer = %DesktopRows
+@onready var connect_dialog: ConfirmationDialog = %ConnectDialog
 
 func _ready() -> void:
-	if DirAccess.dir_exists_absolute(Framework.DESKTOPS_PATH):
-		for d in DirAccess.get_directories_at(Framework.DESKTOPS_PATH):
+	desktops_path = PlayerProfileManager.profile_root.path_join(Framework.DESKTOPS_PATH)
+	if DirAccess.dir_exists_absolute(desktops_path):
+		for d in DirAccess.get_directories_at(desktops_path):
 			if UUID.is_valid(d):
-				var metadata_file = Framework.DESKTOPS_PATH.path_join(d).path_join(Framework.DESKTOP_METADATA_FILE)
+				var metadata_file = Framework.get_desktop_metadata_file(d)
 				if not FileAccess.file_exists(metadata_file):
 					push_error("Desktop directory missing metadata file: ", d)
 					continue
@@ -40,6 +43,7 @@ func _add_row(metadata: DesktopMetadata, is_new: bool = false) -> void:
 	row.name_label.text = metadata.friendly_name
 	row.activated.connect(_on_row_activated.bind(metadata.uuid))
 	row.name_edited.connect(_on_row_name_edited.bind(metadata.uuid))
+	row.disabled = metadata.uuid.begins_with("R-")
 	rows[metadata.uuid] = row
 	
 	if is_new:
@@ -52,10 +56,10 @@ func _on_create_new_desktop_button_pressed() -> void:
 
 func _on_row_activated(desktop_uuid: String) -> void:
 	get_window().title = desktops[desktop_uuid].friendly_name
-	var desktop_scene = load("res://framework/desktop.tscn")
+	var desktop_scene = load("res://framework/desktop/desktop.tscn")
 	var desktop = desktop_scene.instantiate()
-	desktop.name = "Desktop-" + desktop_uuid
-	desktop.metadata = desktops[desktop_uuid]
+	desktop.name = "Desktop"
+	desktop.uuid = desktop_uuid
 	var tree = get_tree()
 	tree.root.remove_child(self)
 	tree.root.add_child(desktop)
@@ -86,3 +90,23 @@ func _on_row_name_edited(new_name: String, desktop_uuid: String) -> void:
 			push_error("Failed to save metadata %s: %s" % [metadata_path, error_string(err)])
 			return
 	rows[desktop_uuid].name_label.text = new_name
+
+func _on_join_remote_desktop_button_pressed() -> void:
+	connect_dialog.popup_centered()
+
+
+func _on_confirmation_dialog_confirmed() -> void:
+	var url: String = connect_dialog.url_line_edit.text
+	assert(URI.parse_uri(url))
+	
+	get_window().title = "Connecting to " + url
+	var desktop_scene = load("res://framework/desktop/desktop.tscn")
+	var desktop = desktop_scene.instantiate()
+	desktop.name = "Desktop"
+	desktop.remote_url = url
+	var tree = get_tree()
+	tree.root.remove_child(self)
+	tree.root.add_child(desktop)
+	tree.current_scene = desktop
+	queue_free()
+	

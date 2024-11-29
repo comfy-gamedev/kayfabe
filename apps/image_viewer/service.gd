@@ -20,7 +20,7 @@ func _icon_activated() -> void:
 	push_error("_icon_activated not implemented for app %s" % app_manifest.name)
 
 func _can_open_document(document: Document) -> bool:
-	return document.get_working_file_path().get_extension() in SUPPORTED_EXTS
+	return document.get_file_name().get_extension() in SUPPORTED_EXTS
 
 func _open_document(document: Document) -> void:
 	var window = VIEWER.instantiate()

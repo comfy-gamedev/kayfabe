@@ -56,7 +56,6 @@ func _update_layout() -> void:
 			c.visible = true
 		focused_child_index = -1
 	else:
-		var best_score = 0
 		for i in get_child_count():
 			var c = get_child(i) as AppItemListItem
 			var score = score_func.call(c.app_key)
@@ -113,6 +112,7 @@ func _sort_children() -> void:
 		for i in get_child_count():
 			var item = get_child(i) as AppItemListItem
 			item.layout = AppItemListItem.Layout.GRID
+			@warning_ignore("integer_division")
 			item.position = Vector2(
 				(i % _columns) * col_width,
 				(i / _columns) * _row_height)

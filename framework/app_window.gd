@@ -24,6 +24,8 @@ const META_HIT_DETECTED = &"AppWindow_hit_detected"
 
 @export var frame_scene: PackedScene = preload("default_app_window_frame.tscn")
 
+var service: AppService
+
 var is_current: bool = false
 
 var frame: Control
@@ -76,7 +78,6 @@ func _input(event: InputEvent) -> void:
 			Desktop.current.window_bring_to_front(self)
 
 func _gui_input(event: InputEvent) -> void:
-	var e = event.xformed_by(get_global_transform())
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			accept_event()
