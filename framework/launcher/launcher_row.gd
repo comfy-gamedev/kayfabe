@@ -3,6 +3,8 @@ extends PanelContainer
 signal activated()
 signal name_edited(new_name: String)
 
+var disabled: bool = false: set = set_disabled
+
 @onready var icon_texture_rect: TextureRect = %IconTextureRect
 @onready var name_label: Label = %NameLabel
 @onready var launch_button: Button = %LaunchButton
@@ -17,6 +19,7 @@ func _ready() -> void:
 	focus_exited.connect(queue_redraw)
 
 func _gui_input(event: InputEvent) -> void:
+	if disabled: return
 	if event is InputEventMouseButton:
 		if event.double_click:
 			activated.emit()
@@ -30,6 +33,10 @@ func edit_name() -> void:
 	name_line_edit.show()
 	name_line_edit.grab_focus()
 	name_line_edit.select_all()
+
+func set_disabled(v: bool) -> void:
+	disabled = v
+	launch_button.disabled = disabled
 
 func _on_launch_button_pressed() -> void:
 	activated.emit()

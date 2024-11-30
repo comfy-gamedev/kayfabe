@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://q47mcsht12hf"]
+
+[ext_resource type="Script" uid="uid://dc2vuy8se8akx" path="res://framework/desktop/desktop.gd" id="1_dy4nd"]
+[ext_resource type="PackedScene" uid="uid://b6twsln376grv" path="res://framework/shells/default/shell.tscn" id="2_abvqg"]
+[ext_resource type="Script" uid="uid://bfxhqfxwab2w2" path="res://framework/network/network_plumber.gd" id="2_ihny7"]
+[ext_resource type="Script" uid="uid://ceuwqu7t36sam" path="res://framework/network/network_transfer_handler.gd" id="3_ihny7"]
+
+[node name="Desktop" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dy4nd")
+
+[node name="NetworkPlumber" type="Node" parent="."]
+script = ExtResource("2_ihny7")
+metadata/_custom_type_script = ExtResource("2_ihny7")
+
+[node name="NetworkTransferHandler" type="Node" parent="." node_paths=PackedStringArray("network_plumber")]
+script = ExtResource("3_ihny7")
+network_plumber = NodePath("../NetworkPlumber")
+metadata/_custom_type_script = ExtResource("3_ihny7")
+
+[node name="BackgroundCanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Wallpaper" type="Panel" parent="BackgroundCanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Wallpaper"
+
+[node name="WindowRoot" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="ShellCanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Shell" parent="ShellCanvasLayer" instance=ExtResource("2_abvqg")]
+
+[connection signal="start_server" from="ShellCanvasLayer/Shell" to="." method="_on_shell_start_server"]
+[connection signal="stop_server" from="ShellCanvasLayer/Shell" to="." method="_on_shell_stop_server"]

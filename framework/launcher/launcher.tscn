@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://pll20oxcde3w"]
+[gd_scene load_steps=4 format=3 uid="uid://pll20oxcde3w"]
 
 [ext_resource type="Theme" uid="uid://k3xs7tj2j1ha" path="res://framework/launcher/launcher_theme.tres" id="1_ktluf"]
-[ext_resource type="Script" path="res://framework/launcher/launcher.gd" id="2_fc3sy"]
+[ext_resource type="Script" uid="uid://defp8frjceoir" path="res://framework/launcher/launcher.gd" id="2_fc3sy"]
+[ext_resource type="Script" uid="uid://dc2i4kuptofbf" path="res://framework/launcher/connect_dialog.gd" id="3_vucj0"]
 
 [node name="Launcher" type="PanelContainer"]
 anchors_preset = 15
@@ -38,4 +39,47 @@ alignment = 1
 layout_mode = 2
 text = "Create New Desktop"
 
+[node name="JoinRemoteDesktopButton" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Connect To Remote Desktop"
+
+[node name="ConnectDialog" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+title = "Connect To..."
+initial_position = 1
+size = Vector2i(831, 100)
+ok_button_text = "Surf to it!"
+cancel_button_text = "Nevermind"
+script = ExtResource("3_vucj0")
+
+[node name="GridContainer" type="GridContainer" parent="ConnectDialog"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="Label" type="Label" parent="ConnectDialog/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "URL:"
+horizontal_alignment = 2
+
+[node name="URLLineEdit" type="LineEdit" parent="ConnectDialog/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/minimum_character_width = 40
+
 [connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/CreateNewDesktopButton" to="." method="_on_create_new_desktop_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/JoinRemoteDesktopButton" to="." method="_on_join_remote_desktop_button_pressed"]
+[connection signal="about_to_popup" from="ConnectDialog" to="ConnectDialog" method="_on_about_to_popup"]
+[connection signal="confirmed" from="ConnectDialog" to="." method="_on_confirmation_dialog_confirmed"]
+[connection signal="text_changed" from="ConnectDialog/GridContainer/URLLineEdit" to="ConnectDialog" method="_on_url_line_edit_text_changed"]

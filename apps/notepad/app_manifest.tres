@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="AppManifest" load_steps=2 format=3 uid="uid://e2cgtjhjbslf"]
+
+[ext_resource type="Script" path="res://framework/resource_types/app_manifest.gd" id="1_7effk"]
+
+[resource]
+script = ExtResource("1_7effk")
+name = "Notepad"
+service_node_path = "res://apps/notepad/service.gd"

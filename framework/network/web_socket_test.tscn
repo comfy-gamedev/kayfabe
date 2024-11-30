@@ -1,0 +1,122 @@
+[gd_scene load_steps=4 format=3 uid="uid://chvkmi4hd6bjj"]
+
+[ext_resource type="Script" path="res://framework/network/_network.gd" id="1_8m0aj"]
+[ext_resource type="Script" path="res://framework/network/web_socket_test.gd" id="1_ncjq8"]
+[ext_resource type="Script" path="res://framework/network/network_transfer_handler.gd" id="3_gnjfu"]
+
+[node name="WebSocketTest" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ncjq8")
+
+[node name="Network" type="Node" parent="."]
+script = ExtResource("1_8m0aj")
+metadata/_custom_type_script = ExtResource("1_8m0aj")
+
+[node name="NetworkTransferHandler" type="Node" parent="."]
+script = ExtResource("3_gnjfu")
+metadata/_custom_type_script = ExtResource("3_gnjfu")
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0868056
+anchor_top = 0.0802469
+anchor_right = 0.394965
+anchor_bottom = 0.455247
+text = "Start Client"
+metadata/_edit_use_anchors_ = true
+
+[node name="Button2" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.465278
+anchor_top = 0.0864198
+anchor_right = 0.773438
+anchor_bottom = 0.46142
+text = "Start Server"
+metadata/_edit_use_anchors_ = true
+
+[node name="Active" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Active"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.310764
+anchor_top = 0.0277778
+anchor_right = 0.989583
+anchor_bottom = 0.771605
+offset_bottom = -3.05176e-05
+metadata/_edit_use_anchors_ = true
+
+[node name="Messages" type="VBoxContainer" parent="Active/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="Active"]
+layout_mode = 0
+anchor_left = 0.03125
+anchor_top = 0.381173
+anchor_right = 0.240451
+anchor_bottom = 0.442901
+metadata/_edit_use_anchors_ = true
+
+[node name="DocView" type="Control" parent="Active"]
+visible = false
+anchors_preset = 0
+anchor_left = 0.0321181
+anchor_top = 0.486111
+anchor_right = 0.253472
+anchor_bottom = 0.978395
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Active/DocView"]
+layout_mode = 0
+anchor_right = 0.682353
+anchor_bottom = 0.0689655
+offset_right = -134.0
+offset_bottom = -6.0
+theme_override_font_sizes/font_size = 19
+text = "Received document:"
+metadata/_edit_use_anchors_ = true
+
+[node name="DocTexture" type="TextureRect" parent="Active/DocView"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.103448
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[connection signal="connected" from="Network" to="." method="_on_network_connected"]
+[connection signal="disconnected" from="Network" to="." method="_on_network_disconnected"]
+[connection signal="message_received" from="Network" to="." method="_on_network_message_received"]
+[connection signal="peer_connected" from="Network" to="." method="_on_network_peer_connected"]
+[connection signal="peer_disconnected" from="Network" to="." method="_on_network_peer_disconnected"]
+[connection signal="download_started" from="NetworkTransferHandler" to="." method="_on_network_transfer_handler_download_started"]
+[connection signal="pressed" from="Menu/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Menu/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="text_submitted" from="Active/LineEdit" to="." method="_on_line_edit_text_submitted"]

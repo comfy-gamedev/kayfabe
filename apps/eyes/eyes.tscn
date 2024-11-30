@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://cuyfpoxiv5w7g"]
 
-[ext_resource type="Script" path="res://framework/app_window.gd" id="1_yr7s7"]
-[ext_resource type="Script" path="res://apps/eyes/control.gd" id="2_i0i4p"]
+[ext_resource type="Script" uid="uid://dld75lpub1d6x" path="res://apps/eyes/eyes.gd" id="1_u2isi"]
+[ext_resource type="Script" uid="uid://x02bompduiyc" path="res://apps/eyes/control.gd" id="2_i0i4p"]
 
 [node name="Eyes" type="Container"]
 offset_right = 187.0
 offset_bottom = 158.0
 mouse_filter = 0
 theme_type_variation = &"AppWindow"
-script = ExtResource("1_yr7s7")
+script = ExtResource("1_u2isi")
 title = "Eyes"
 
 [node name="Control" type="Control" parent="."]

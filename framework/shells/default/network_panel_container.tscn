@@ -1,0 +1,81 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4kcbhhjvkdp2"]
+
+[ext_resource type="Script" uid="uid://b2ab6lpke0uo0" path="res://framework/shells/default/network_panel_container.gd" id="1_b2qex"]
+
+[node name="NetworkPanelContainer" type="PanelContainer"]
+custom_minimum_size = Vector2(200, 0)
+script = ExtResource("1_b2qex")
+metadata/_edit_use_anchors_ = true
+
+[node name="OfflineView" type="Control" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OfflineView"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartServerButton" type="Button" parent="OfflineView/VBoxContainer"]
+layout_mode = 2
+text = "Start Server"
+
+[node name="ServerView" type="Control" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ServerView"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StopServerButton" type="Button" parent="ServerView/VBoxContainer"]
+layout_mode = 2
+text = "Stop Server"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ServerView/VBoxContainer"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="UrlLineEdit" type="LineEdit" parent="ServerView/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "wss://asdf/asdf/"
+editable = false
+
+[node name="Label" type="Label" parent="ServerView/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Connected Players:"
+
+[node name="PlayersList" type="ItemList" parent="ServerView/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ClientView" type="Control" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ClientView"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DisconnectButton" type="Button" parent="ClientView/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Start Server"
+
+[connection signal="pressed" from="OfflineView/VBoxContainer/StartServerButton" to="." method="_on_start_server_button_pressed"]
+[connection signal="pressed" from="ServerView/VBoxContainer/StopServerButton" to="." method="_on_stop_server_button_pressed"]
+[connection signal="draw" from="ServerView/VBoxContainer/VBoxContainer/UrlLineEdit" to="." method="_on_url_line_edit_draw"]
+[connection signal="gui_input" from="ServerView/VBoxContainer/VBoxContainer/UrlLineEdit" to="." method="_on_url_line_edit_gui_input"]
