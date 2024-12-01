@@ -25,7 +25,7 @@ func _can_open_document(document: Document) -> bool:
 func _open_document(document: Document) -> void:
 	var window = VIEWER.instantiate()
 	window.document = document
-	Desktop.current.window_open(window)
+	window_open(window)
 
 enum {
 	NOTIFICATION_LAUNCH_DOCUMENT,
@@ -36,4 +36,4 @@ func _app_notification(what: int, data: Variant) -> void:
 		NOTIFICATION_LAUNCH_DOCUMENT:
 			var window = VIEWER.instantiate()
 			window.document = data as Document
-			Desktop.current.window_open(window)
+			window_open(window)
