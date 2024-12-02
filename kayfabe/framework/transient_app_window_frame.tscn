@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://xeo71s0b8g8a"]
+
+[ext_resource type="PackedScene" uid="uid://ct5qq8nitawj0" path="res://framework/default_app_window_frame.tscn" id="1_owofv"]
+
+[node name="TransientAppWindowFrame" instance=ExtResource("1_owofv")]
+show_titlebar = false
+show_footer = false
+
+[node name="AppWindowTitlebarPanelContainer" parent="." index="0"]
+visible = false
+
+[node name="AppWindowFooterHBoxContainer" parent="." index="2"]
+visible = false
