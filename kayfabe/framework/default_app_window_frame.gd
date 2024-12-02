@@ -51,8 +51,15 @@ func get_content_rect() -> Rect2:
 		content_panel_container.size - style.get_minimum_size())
 
 func get_frame_size() -> Vector2:
-	var style := content_panel_container.get_theme_stylebox("panel")
-	return style.get_minimum_size()
+	var style := content_panel_container.get_theme_stylebox("panel").get_minimum_size()
+	var head := titlebar_panel_container.get_combined_minimum_size() if titlebar_panel_container.visible else Vector2.ZERO
+	var foot := footer_panel_container.get_combined_minimum_size() if footer_panel_container.visible else Vector2.ZERO
+	
+	var result := Vector2()
+	result.x = max(style.x, head.x, foot.x)
+	result.y = style.y + head.y + foot.y
+	
+	return result
 
 func add_user_button(id: StringName, p_tooltip_text: String = "", normal_icon: Texture2D = null, disabled_icon: Texture2D = null, hover_icon: Texture2D = null, pressed_icon: Texture2D = null) -> void:
 	if id in _user_buttons:

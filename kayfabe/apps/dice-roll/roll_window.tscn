@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3dtlr6nvmg5o"]
+
+[ext_resource type="Script" path="res://apps/dice-roll/roll_window.gd" id="1_ryasa"]
+[ext_resource type="Script" path="res://framework/app_window.gd" id="1_yygp2"]
+[ext_resource type="PackedScene" uid="uid://xeo71s0b8g8a" path="res://framework/transient_app_window_frame.tscn" id="2_ryasa"]
+
+[node name="DiceRollTransientWindow" type="Container"]
+offset_right = 310.0
+offset_bottom = 209.0
+mouse_filter = 0
+theme_type_variation = &"AppWindow"
+script = ExtResource("1_ryasa")
+frame_scene = ExtResource("2_ryasa")
+metadata/_custom_type_script = ExtResource("1_yygp2")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="ResultLineEdit" type="LineEdit" parent="PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Formula"
+editable = false
+
+[node name="MenuButton" type="MenuButton" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "dsdfasdf"
+item_count = 1
+popup/item_0/text = "asdfasdf"
+popup/item_0/id = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Dice" type="HFlowContainer" parent="PanelContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1

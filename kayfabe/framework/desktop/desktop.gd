@@ -109,11 +109,18 @@ func window_bring_to_front(app_window: AppWindow) -> void:
 		push_error("Unknown window.")
 		return
 	
+	if idx == windows.size() - 1:
+		return
+	
 	for i in range(idx, windows.size() - 1):
 		windows[i] = windows[i + 1]
 	windows[-1] = app_window
 	
 	_update_windows_z_index()
+	
+	if windows.size() > 1:
+		windows[-2].unfocused.emit()
+	windows[-1].focused.emit()
 
 func app_get_service(app_id: StringName) -> AppService:
 	var app = app_services.get(app_id)

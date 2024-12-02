@@ -1,0 +1,256 @@
+[gd_scene load_steps=13 format=3 uid="uid://1i32v7m43w1c"]
+
+[ext_resource type="Script" path="res://framework/app_window.gd" id="1_n17ra"]
+[ext_resource type="Script" path="res://apps/dice-roll/controller.gd" id="1_svd1v"]
+[ext_resource type="Texture2D" uid="uid://cvyp50mdyhfgn" path="res://apps/dice-roll/d20.png" id="3_er7le"]
+[ext_resource type="Script" path="res://apps/dice-roll/die_counter.gd" id="4_riek0"]
+[ext_resource type="Texture2D" uid="uid://08gw2so4ewj" path="res://apps/dice-roll/d2.png" id="5_fing5"]
+[ext_resource type="Texture2D" uid="uid://b8p86resl0sqf" path="res://apps/dice-roll/d4.png" id="6_rour3"]
+[ext_resource type="Texture2D" uid="uid://dqh1dhun8xtme" path="res://apps/dice-roll/d6.png" id="7_5nd1i"]
+[ext_resource type="Texture2D" uid="uid://b0lghjni7g1je" path="res://apps/dice-roll/d8.png" id="8_dfv0o"]
+[ext_resource type="Texture2D" uid="uid://dgp8rmxlqbnbb" path="res://apps/dice-roll/d10.png" id="9_tp02t"]
+[ext_resource type="Texture2D" uid="uid://cvbmw1i3fgebc" path="res://apps/dice-roll/d12.png" id="10_f176h"]
+[ext_resource type="Texture2D" uid="uid://b8ofvsgax2jpc" path="res://apps/dice-roll/dF.png" id="11_vdjs6"]
+
+[sub_resource type="Theme" id="Theme_er7le"]
+Control/icons/roll_icon = ExtResource("3_er7le")
+
+[node name="DiceRollController" type="Container"]
+offset_right = 407.0
+offset_bottom = 289.0
+mouse_filter = 0
+theme_type_variation = &"AppWindow"
+script = ExtResource("1_svd1v")
+title = "Dice Roll"
+metadata/_custom_type_script = ExtResource("1_n17ra")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RollOpenButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "Roll (open)"
+
+[node name="RollHiddenButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "Roll (hidden)"
+
+[node name="ResetButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Reset"
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Selected dice:"
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="D2" type="Control" parent="PanelContainer/VBoxContainer/PanelContainer/CenterContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+tooltip_text = "Remove"
+focus_mode = 2
+theme = SubResource("Theme_er7le")
+script = ExtResource("4_riek0")
+kind = "2"
+
+[node name="D4" type="Control" parent="PanelContainer/VBoxContainer/PanelContainer/CenterContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+tooltip_text = "Remove"
+focus_mode = 2
+theme = SubResource("Theme_er7le")
+script = ExtResource("4_riek0")
+kind = "4"
+
+[node name="D6" type="Control" parent="PanelContainer/VBoxContainer/PanelContainer/CenterContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+tooltip_text = "Remove"
+focus_mode = 2
+theme = SubResource("Theme_er7le")
+script = ExtResource("4_riek0")
+kind = "6"
+
+[node name="D8" type="Control" parent="PanelContainer/VBoxContainer/PanelContainer/CenterContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+tooltip_text = "Remove"
+focus_mode = 2
+theme = SubResource("Theme_er7le")
+script = ExtResource("4_riek0")
+kind = "8"
+
+[node name="D10" type="Control" parent="PanelContainer/VBoxContainer/PanelContainer/CenterContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+tooltip_text = "Remove"
+focus_mode = 2
+theme = SubResource("Theme_er7le")
+script = ExtResource("4_riek0")
+kind = "10"
+
+[node name="D12" type="Control" parent="PanelContainer/VBoxContainer/PanelContainer/CenterContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+tooltip_text = "Remove"
+focus_mode = 2
+theme = SubResource("Theme_er7le")
+script = ExtResource("4_riek0")
+kind = "12"
+
+[node name="D20" type="Control" parent="PanelContainer/VBoxContainer/PanelContainer/CenterContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+tooltip_text = "Remove"
+focus_mode = 2
+theme = SubResource("Theme_er7le")
+script = ExtResource("4_riek0")
+
+[node name="DF" type="Control" parent="PanelContainer/VBoxContainer/PanelContainer/CenterContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+tooltip_text = "Remove"
+focus_mode = 2
+theme = SubResource("Theme_er7le")
+script = ExtResource("4_riek0")
+kind = "F"
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Available dice:"
+
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer2/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="D2Button" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "Coin"
+icon = ExtResource("5_fing5")
+
+[node name="D4Button" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "d4"
+icon = ExtResource("6_rour3")
+
+[node name="D6Button" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "d6"
+icon = ExtResource("7_5nd1i")
+
+[node name="D8Button" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "d8"
+icon = ExtResource("8_dfv0o")
+
+[node name="D10Button" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "d10"
+icon = ExtResource("9_tp02t")
+
+[node name="D12Button" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "d12"
+icon = ExtResource("10_f176h")
+
+[node name="D20Button" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "d20"
+icon = ExtResource("3_er7le")
+
+[node name="DFButton" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "d20"
+icon = ExtResource("11_vdjs6")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ModMinusButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "–"
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+
+[node name="ModifierLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="ModPlusButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "+"
+
+[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Formula:"
+
+[node name="FormulaLineEdit" type="LineEdit" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Formula"
+theme_override_constants/minimum_character_width = 0
+editable = false
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer2/RollOpenButton" to="." method="_on_roll_open_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer2/RollHiddenButton" to="." method="_on_roll_hidden_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer2/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer/D2Button" to="." method="_on_d_2_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer/D4Button" to="." method="_on_d_4_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer/D6Button" to="." method="_on_d_6_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer/D8Button" to="." method="_on_d_8_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer/D10Button" to="." method="_on_d_10_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer/D12Button" to="." method="_on_d_12_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer/D20Button" to="." method="_on_d_20_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer2/CenterContainer/HBoxContainer/DFButton" to="." method="_on_df_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/ModMinusButton" to="." method="_on_mod_minus_button_pressed"]
+[connection signal="gui_input" from="PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/ModifierLabel" to="." method="_on_modifier_label_gui_input"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/ModPlusButton" to="." method="_on_mod_plus_button_pressed"]
