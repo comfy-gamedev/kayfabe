@@ -110,14 +110,12 @@ func _on_new_desktop_button_toggled(toggled_on):
 	new_desktop_popup_panel.visible = toggled_on
 	if toggled_on:
 		new_desktop_name_input.grab_focus()
-		join_server_button.button_pressed = false
 	else:
 		new_desktop_name_input.text = ""
 
 func _on_join_server_button_toggled(toggled_on):
 	join_server_popup_panel.visible = toggled_on
 	if toggled_on:
-		new_desktop_button.button_pressed = false
 		join_server_url_input.grab_focus()
 	else:
 		join_server_url_input.text = ""

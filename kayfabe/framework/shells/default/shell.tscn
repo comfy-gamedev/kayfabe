@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6twsln376grv"]
+[gd_scene load_steps=14 format=3 uid="uid://b6twsln376grv"]
 
 [ext_resource type="Script" path="res://framework/shells/default/shell.gd" id="1_qlls7"]
+[ext_resource type="ButtonGroup" uid="uid://5eb8wpr77ao7" path="res://framework/shells/default/desktop_switcher_button_group.tres" id="2_gwngb"]
 [ext_resource type="Script" path="res://framework/shells/default/app_item_list.gd" id="2_nwivk"]
 [ext_resource type="Texture2D" uid="uid://mh48osisb557" path="res://themes/cyberfire/cyberfire_icons.png" id="2_pdc4m"]
 [ext_resource type="PackedScene" uid="uid://b6piwmude7tao" path="res://framework/shells/default/send_recv_icon.tscn" id="2_ww856"]
@@ -78,6 +79,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Create a new desktop"
 toggle_mode = true
+button_group = ExtResource("2_gwngb")
 icon = SubResource("AtlasTexture_ecsbf")
 icon_alignment = 1
 expand_icon = true
@@ -116,6 +118,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Join a remote session"
 toggle_mode = true
+button_group = ExtResource("2_gwngb")
 icon = SubResource("AtlasTexture_c5o4s")
 icon_alignment = 1
 expand_icon = true
