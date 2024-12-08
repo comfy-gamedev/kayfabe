@@ -9,14 +9,23 @@ signal stop_server()
 @onready var app_item_list = %AppItemList
 @onready var search_line_edit: LineEdit = %SearchLineEdit
 @onready var menu_panel_container: PanelContainer = %MenuPanelContainer
-@onready var desktop_panel_container: PanelContainer = %DesktopPanelContainer
-@onready var network_panel_container: PanelContainer = %NetworkPanelContainer
 
+@onready var desktop_panel_container: PanelContainer = %DesktopPanelContainer
+@onready var new_desktop_button = %NewDesktopButton
+@onready var new_desktop_popup_panel = %NewDesktopPopupPanel
+@onready var new_desktop_name_input = %NewDesktopNameInput
+@onready var join_server_button = %JoinServerButton
+@onready var join_server_popup_panel = %JoinServerPopupPanel
+@onready var join_server_url_input = %JoinServerUrlInput
+
+@onready var network_panel_container: PanelContainer = %NetworkPanelContainer
 var _score_cache: Dictionary
 
 func _ready() -> void:
 	desktop_panel_container.hide()
 	menu_panel_container.hide()
+	new_desktop_popup_panel.hide()
+	join_server_popup_panel.hide()
 
 func _score_func(app_key: StringName) -> float:
 	var string: String = String(app_key)
@@ -96,3 +105,27 @@ func _on_network_panel_container_start_server_pressed() -> void:
 
 func _on_network_panel_container_stop_server_pressed() -> void:
 	stop_server.emit()
+
+func _on_new_desktop_button_toggled(toggled_on):
+	new_desktop_popup_panel.visible = toggled_on
+	if toggled_on:
+		new_desktop_name_input.grab_focus()
+		join_server_button.button_pressed = false
+	else:
+		new_desktop_name_input.text = ""
+
+func _on_join_server_button_toggled(toggled_on):
+	join_server_popup_panel.visible = toggled_on
+	if toggled_on:
+		new_desktop_button.button_pressed = false
+		join_server_url_input.grab_focus()
+	else:
+		join_server_url_input.text = ""
+		
+func _on_create_desktop_button_pressed():
+	pass # TODO: Make this create a desktop
+	new_desktop_button.button_pressed = false
+
+func _on_join_server_connect_button_pressed():
+	pass # TODO: Steal the client connect code and add to top of desktops
+	join_server_button.button_pressed = false
