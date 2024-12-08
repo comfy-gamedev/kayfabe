@@ -17,7 +17,6 @@ var _score_cache: Dictionary
 func _ready() -> void:
 	desktop_panel_container.hide()
 	menu_panel_container.hide()
-	network_panel_container.hide()
 
 func _score_func(app_key: StringName) -> float:
 	var string: String = String(app_key)
@@ -91,9 +90,6 @@ func _on_search_line_edit_up_pressed() -> void:
 
 func _on_search_line_edit_down_pressed() -> void:
 	app_item_list.focused_child_index += 1
-
-func _on_network_button_toggled(toggled_on: bool) -> void:
-	network_panel_container.visible = toggled_on
 
 func _on_network_panel_container_start_server_pressed() -> void:
 	start_server.emit()

@@ -548,7 +548,7 @@ texture = ExtResource("20_xdl2e")
 
 [resource]
 default_font = ExtResource("7_508xm")
-default_font_size = 14
+default_font_size = 8
 AppWindow/base_type = &"Container"
 AppWindowButton/base_type = &"Button"
 AppWindowButton/styles/focus = SubResource("StyleBoxTexture_6wfca")

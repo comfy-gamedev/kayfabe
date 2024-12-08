@@ -93,8 +93,10 @@ expand_icon = true
 [node name="HSeparator" type="HSeparator" parent="HBoxContainer/DesktopPanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer/DesktopPanelContainer/VBoxContainer"]
+[node name="NetworkPanelContainer" parent="HBoxContainer/DesktopPanelContainer/VBoxContainer" instance=ExtResource("6_j6ciu")]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 8
 
 [node name="MenuPanelContainer" type="PanelContainer" parent="HBoxContainer"]
 unique_name_in_owner = true
@@ -161,10 +163,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="NetworkPanelContainer" parent="HBoxContainer" instance=ExtResource("6_j6ciu")]
-unique_name_in_owner = true
-layout_mode = 2
-
 [node name="ShellBar" type="PanelContainer" parent="."]
 layout_mode = 2
 theme_type_variation = &"ShellBarPanelContainer"
@@ -211,17 +209,11 @@ layout_mode = 2
 [node name="SendRecvIcon" parent="ShellBar/HBoxContainer/ShellServiceIcons" instance=ExtResource("2_ww856")]
 layout_mode = 2
 
-[node name="NetworkButton" type="Button" parent="ShellBar/HBoxContainer/ShellServiceIcons"]
-layout_mode = 2
-toggle_mode = true
-text = "📡"
-
+[connection signal="start_server_pressed" from="HBoxContainer/DesktopPanelContainer/VBoxContainer/NetworkPanelContainer" to="." method="_on_network_panel_container_start_server_pressed"]
+[connection signal="stop_server_pressed" from="HBoxContainer/DesktopPanelContainer/VBoxContainer/NetworkPanelContainer" to="." method="_on_network_panel_container_stop_server_pressed"]
 [connection signal="app_clicked" from="HBoxContainer/MenuPanelContainer/VBoxContainer/MenuTabs/Apps/AppItemList" to="." method="_on_app_item_list_app_clicked"]
 [connection signal="down_pressed" from="HBoxContainer/MenuPanelContainer/VBoxContainer/SearchLineEdit" to="." method="_on_search_line_edit_down_pressed"]
 [connection signal="text_changed" from="HBoxContainer/MenuPanelContainer/VBoxContainer/SearchLineEdit" to="." method="_on_search_line_edit_text_changed"]
 [connection signal="up_pressed" from="HBoxContainer/MenuPanelContainer/VBoxContainer/SearchLineEdit" to="." method="_on_search_line_edit_up_pressed"]
-[connection signal="start_server_pressed" from="HBoxContainer/NetworkPanelContainer" to="." method="_on_network_panel_container_start_server_pressed"]
-[connection signal="stop_server_pressed" from="HBoxContainer/NetworkPanelContainer" to="." method="_on_network_panel_container_stop_server_pressed"]
 [connection signal="pressed" from="ShellBar/HBoxContainer/DesktopButton" to="." method="_on_desktop_button_pressed"]
 [connection signal="pressed" from="ShellBar/HBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
-[connection signal="toggled" from="ShellBar/HBoxContainer/ShellServiceIcons/NetworkButton" to="." method="_on_network_button_toggled"]

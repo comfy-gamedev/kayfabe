@@ -3,79 +3,58 @@
 [ext_resource type="Script" path="res://framework/shells/default/network_panel_container.gd" id="1_b2qex"]
 
 [node name="NetworkPanelContainer" type="PanelContainer"]
-custom_minimum_size = Vector2(200, 0)
+offset_right = 64.0
+offset_bottom = 32.0
+size_flags_vertical = 3
 script = ExtResource("1_b2qex")
 metadata/_edit_use_anchors_ = true
 
-[node name="OfflineView" type="Control" parent="."]
+[node name="OfflineView" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="OfflineView"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="StartServerButton" type="Button" parent="OfflineView/VBoxContainer"]
+[node name="StartServerButton" type="Button" parent="OfflineView"]
 layout_mode = 2
 text = "Start Server"
 
-[node name="ServerView" type="Control" parent="."]
-visible = false
+[node name="ServerView" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ServerView"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="StopServerButton" type="Button" parent="ServerView/VBoxContainer"]
+[node name="StopServerButton" type="Button" parent="ServerView"]
 layout_mode = 2
 text = "Stop Server"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ServerView/VBoxContainer"]
-custom_minimum_size = Vector2(0, 180)
+[node name="VBoxContainer" type="VBoxContainer" parent="ServerView"]
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="UrlLineEdit" type="LineEdit" parent="ServerView/VBoxContainer/VBoxContainer"]
+[node name="UrlLineEdit" type="LineEdit" parent="ServerView/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "wss://asdf/asdf/"
 editable = false
 
-[node name="Label" type="Label" parent="ServerView/VBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="ServerView/VBoxContainer"]
 layout_mode = 2
-text = "Connected Players:"
+size_flags_vertical = 1
+text = "Remote Users:"
 
-[node name="PlayersList" type="ItemList" parent="ServerView/VBoxContainer/VBoxContainer"]
+[node name="PlayersList" type="ItemList" parent="ServerView/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ClientView" type="Control" parent="."]
+[node name="ClientView" type="VBoxContainer" parent="."]
 visible = false
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ClientView"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="DisconnectButton" type="Button" parent="ClientView/VBoxContainer"]
+[node name="DisconnectButton" type="Button" parent="ClientView"]
 layout_mode = 2
 disabled = true
 text = "Start Server"
 
-[connection signal="pressed" from="OfflineView/VBoxContainer/StartServerButton" to="." method="_on_start_server_button_pressed"]
-[connection signal="pressed" from="ServerView/VBoxContainer/StopServerButton" to="." method="_on_stop_server_button_pressed"]
-[connection signal="draw" from="ServerView/VBoxContainer/VBoxContainer/UrlLineEdit" to="." method="_on_url_line_edit_draw"]
-[connection signal="gui_input" from="ServerView/VBoxContainer/VBoxContainer/UrlLineEdit" to="." method="_on_url_line_edit_gui_input"]
+[connection signal="pressed" from="OfflineView/StartServerButton" to="." method="_on_start_server_button_pressed"]
+[connection signal="pressed" from="ServerView/StopServerButton" to="." method="_on_stop_server_button_pressed"]
+[connection signal="draw" from="ServerView/VBoxContainer/UrlLineEdit" to="." method="_on_url_line_edit_draw"]
+[connection signal="gui_input" from="ServerView/VBoxContainer/UrlLineEdit" to="." method="_on_url_line_edit_gui_input"]

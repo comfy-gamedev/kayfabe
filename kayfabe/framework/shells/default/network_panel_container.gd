@@ -44,7 +44,6 @@ func _on_start_server_button_pressed() -> void:
 func _on_stop_server_button_pressed() -> void:
 	stop_server_pressed.emit()
 
-
 var __t: float = -1
 
 func _on_url_line_edit_gui_input(event: InputEvent) -> void:
