@@ -36,6 +36,10 @@ gdscript/warnings/missing_tool=0
 window/stretch/aspect="ignore"
 window/stretch/scale=2.0
 
+[editor]
+
+movie_writer/movie_file="C:/Users/ahowa/Documents/GitHub/kayfabe/demo_vid.avi"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/swatch_palette/plugin.cfg")
