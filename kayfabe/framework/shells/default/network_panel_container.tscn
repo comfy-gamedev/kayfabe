@@ -45,15 +45,6 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ClientView" type="VBoxContainer" parent="."]
-visible = false
-layout_mode = 2
-
-[node name="DisconnectButton" type="Button" parent="ClientView"]
-layout_mode = 2
-disabled = true
-text = "Start Server"
-
 [connection signal="pressed" from="OfflineView/StartServerButton" to="." method="_on_start_server_button_pressed"]
 [connection signal="pressed" from="ServerView/StopServerButton" to="." method="_on_stop_server_button_pressed"]
 [connection signal="draw" from="ServerView/VBoxContainer/UrlLineEdit" to="." method="_on_url_line_edit_draw"]

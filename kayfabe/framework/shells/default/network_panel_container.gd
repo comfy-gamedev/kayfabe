@@ -5,7 +5,6 @@ signal stop_server_pressed()
 
 @onready var offline_view: Control = $OfflineView
 @onready var server_view: Control = $ServerView
-@onready var client_view: Control = $ClientView
 @onready var url_line_edit: LineEdit = %UrlLineEdit
 @onready var players_list: ItemList = %PlayersList
 
@@ -20,7 +19,6 @@ func _update() -> void:
 	if multiplayer.multiplayer_peer is not OfflineMultiplayerPeer and multiplayer.is_server():
 		offline_view.hide()
 		server_view.show()
-		client_view.hide()
 		players_list.clear()
 		url_line_edit.text = Desktop.current.desktop_multiplayer.server_url
 		for i in multiplayer.get_peers():
@@ -28,12 +26,10 @@ func _update() -> void:
 	elif not multiplayer.get_peers().is_empty():
 		offline_view.hide()
 		server_view.hide()
-		client_view.show()
 		players_list.clear()
 	else:
 		offline_view.show()
 		server_view.hide()
-		client_view.hide()
 		players_list.clear()
 
 

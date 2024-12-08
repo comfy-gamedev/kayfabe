@@ -72,15 +72,13 @@ custom_minimum_size = Vector2(64, 24)
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="NewDesktopButton" type="MenuButton" parent="HBoxContainer/DesktopPanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="NewDesktopButton" type="Button" parent="HBoxContainer/DesktopPanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Create a new desktop"
 icon = SubResource("AtlasTexture_ecsbf")
-flat = false
 icon_alignment = 1
 expand_icon = true
-item_count = 1
 
 [node name="JoinServerButton" type="Button" parent="HBoxContainer/DesktopPanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
