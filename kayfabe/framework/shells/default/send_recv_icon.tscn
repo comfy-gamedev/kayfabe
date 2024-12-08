@@ -12,12 +12,10 @@ subpixel_positioning = 0
 font = SubResource("SystemFont_12mne")
 font_size = 8
 
-[node name="SendRecvIcon" type="MarginContainer"]
+[node name="SendRecvIcon" type="PanelContainer"]
 custom_minimum_size = Vector2(32, 32)
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
+offset_right = 36.0
+offset_bottom = 36.0
 script = ExtResource("1_3rnj7")
 
 [node name="Base" type="TextureRect" parent="."]

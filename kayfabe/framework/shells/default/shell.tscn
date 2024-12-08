@@ -194,17 +194,15 @@ layout_mode = 2
 theme_type_variation = &"ShellSeparator"
 theme_override_constants/separation = 6
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ShellBar/HBoxContainer"]
+[node name="Taskbar" type="HBoxContainer" parent="ShellBar/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HiddenServiceIcons" type="HBoxContainer" parent="ShellBar/HBoxContainer"]
+[node name="ShellBarStatusPanel" type="PanelContainer" parent="ShellBar/HBoxContainer"]
 layout_mode = 2
+theme_type_variation = &"ShellBarStatusPanel"
 
-[node name="ShellServiceIcons" type="HBoxContainer" parent="ShellBar/HBoxContainer"]
-layout_mode = 2
-
-[node name="SendRecvIcon" parent="ShellBar/HBoxContainer/ShellServiceIcons" instance=ExtResource("2_ww856")]
+[node name="SendRecvIcon" parent="ShellBar/HBoxContainer/ShellBarStatusPanel" instance=ExtResource("2_ww856")]
 layout_mode = 2
 
 [connection signal="start_server_pressed" from="HBoxContainer/DesktopPanelContainer/VBoxContainer/NetworkPanelContainer" to="." method="_on_network_panel_container_start_server_pressed"]
