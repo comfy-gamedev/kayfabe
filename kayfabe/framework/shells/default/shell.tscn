@@ -263,6 +263,11 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="VSeparator2" type="VSeparator" parent="ShellBar/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"ShellSeparator"
+theme_override_constants/separation = 6
+
 [node name="ShellBarStatusPanel" type="PanelContainer" parent="ShellBar/HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"ShellBarStatusPanel"

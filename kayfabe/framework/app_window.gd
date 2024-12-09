@@ -3,6 +3,8 @@ class_name AppWindow
 extends Container
 
 signal close_requested()
+signal closing_window()
+signal minimizing_window()
 
 enum {
 	FLAG_SHOW_TITLEBAR = 1,
@@ -31,6 +33,7 @@ var is_current: bool = false
 var frame: Control
 
 var is_maximized: bool = false
+var is_minimized: bool = false
 
 var _dragging: bool = false
 var _drag_resize: bool = false
@@ -118,6 +121,10 @@ func _sort_children() -> void:
 			if c.visible and not c.top_level:
 				fit_child_in_rect(c, content_rect)
 
+func minimize() -> void:
+	visible = false
+	minimizing_window.emit()
+
 func maximize() -> void:
 	if is_maximized: return
 	_rect_before_maximize = get_rect()
@@ -141,6 +148,7 @@ func bring_to_front() -> void:
 func _on_close_pressed() -> void:
 	close_requested.emit()
 	if close_when_requested:
+		closing_window.emit()
 		Desktop.current.window_close(self)
 
 func _on_maximize_pressed() -> void:
@@ -150,7 +158,8 @@ func _on_maximize_pressed() -> void:
 		unmaximize()
 
 func _on_minimize_pressed() -> void:
-	pass
+	if not is_minimized:
+		minimize()
 
 func _on_smile_pressed() -> void:
 	var voice = DisplayServer.tts_get_voices_for_language("en")[-1]

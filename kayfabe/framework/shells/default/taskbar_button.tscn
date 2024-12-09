@@ -10,3 +10,5 @@ toggle_mode = true
 button_group = ExtResource("1_8gtgo")
 text = "Test App Name"
 script = ExtResource("1_arby0")
+
+[connection signal="toggled" from="." to="." method="_on_toggled"]
