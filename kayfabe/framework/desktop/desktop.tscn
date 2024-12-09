@@ -41,6 +41,7 @@ unique_name_in_owner = true
 layer = 2
 
 [node name="Shell" parent="ShellCanvasLayer" instance=ExtResource("2_abvqg")]
+unique_name_in_owner = true
 
 [connection signal="start_server" from="ShellCanvasLayer/Shell" to="." method="_on_shell_start_server"]
 [connection signal="stop_server" from="ShellCanvasLayer/Shell" to="." method="_on_shell_stop_server"]

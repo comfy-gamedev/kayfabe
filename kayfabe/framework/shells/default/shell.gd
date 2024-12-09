@@ -17,8 +17,12 @@ signal stop_server()
 @onready var join_server_button = %JoinServerButton
 @onready var join_server_popup_panel = %JoinServerPopupPanel
 @onready var join_server_url_input = %JoinServerUrlInput
-
 @onready var network_panel_container: PanelContainer = %NetworkPanelContainer
+
+@onready var taskbar = %Taskbar
+
+var taskbar_button_scene = preload("res://framework/shells/default/taskbar_button.tscn")
+
 var _score_cache: Dictionary
 
 func _ready() -> void:
@@ -26,6 +30,12 @@ func _ready() -> void:
 	menu_panel_container.hide()
 	new_desktop_popup_panel.hide()
 	join_server_popup_panel.hide()
+
+
+func create_taskbar_button_for_window(app_window: AppWindow):
+	var new_button = taskbar_button_scene.instantiate()
+	new_button.app_window = app_window
+	taskbar.add_child(new_button)	
 
 func _score_func(app_key: StringName) -> float:
 	var string: String = String(app_key)

@@ -259,6 +259,7 @@ theme_type_variation = &"ShellSeparator"
 theme_override_constants/separation = 6
 
 [node name="Taskbar" type="HBoxContainer" parent="ShellBar/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 

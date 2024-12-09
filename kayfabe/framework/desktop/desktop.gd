@@ -18,6 +18,7 @@ var desktop_multiplayer: DesktopMultiplayer
 @onready var window_root: Node = %WindowRoot
 @onready var network_plumber: NetworkPlumber = $NetworkPlumber
 @onready var network_transfer_handler: NetworkTransferHandler = $NetworkTransferHandler
+@onready var shell = %Shell
 
 func _enter_tree() -> void:
 	current = self
@@ -87,6 +88,7 @@ func window_open(app_window: AppWindow) -> void:
 	window_root.add_child(canvas_layer)
 	app_window.position = size / 2.0 - app_window.size / 2.0
 	windows.append(app_window)
+	shell.create_taskbar_button_for_window(app_window)
 	_update_windows_z_index()
 
 func window_close(app_window: AppWindow, free: bool = true) -> void:
