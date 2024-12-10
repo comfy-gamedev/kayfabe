@@ -6,6 +6,7 @@ var app_window: AppWindow
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	text = app_window.frame.title
+	icon = app_window.service.manifest.icon
 	app_window.closing_window.connect(_on_window_closed)
 	app_window.minimizing_window.connect(_on_window_minimized)
 	button_pressed = true

@@ -17,7 +17,7 @@ const SUPPORTED_EXTS = [
 const VIEWER = preload("res://apps/image_viewer/viewer.tscn")
 
 func _icon_activated() -> void:
-	push_error("_icon_activated not implemented for app %s" % app_manifest.name)
+	push_error("_icon_activated not implemented for app %s" % manifest.name)
 
 func _can_open_document(document: Document) -> bool:
 	return document.get_file_name().get_extension() in SUPPORTED_EXTS

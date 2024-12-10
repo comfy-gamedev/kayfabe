@@ -68,6 +68,7 @@ func _ready() -> void:
 			service = service_source.new()
 		elif service_source is PackedScene:
 			service = service_source.instantiate()
+		service.manifest = manifest
 		app_services[app_key] = service
 		add_child(service)
 

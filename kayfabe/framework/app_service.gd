@@ -2,10 +2,10 @@ class_name AppService
 extends Node
 
 var app_id: StringName
-var app_manifest: AppManifest
+var manifest: AppManifest
 
 func _icon_activated() -> void: # VIRTUAL
-	push_error("_icon_activated not implemented for app %s" % app_manifest.name)
+	push_error("_icon_activated not implemented for app %s" % manifest.name)
 
 @warning_ignore("unused_parameter")
 func _can_open_document(document: Document) -> bool: # VIRTUAL
@@ -13,7 +13,7 @@ func _can_open_document(document: Document) -> bool: # VIRTUAL
 
 @warning_ignore("unused_parameter")
 func _open_document(document: Document) -> void: # VIRTUAL
-	push_error("_open_document not implemented for app %s" % app_manifest.name)
+	push_error("_open_document not implemented for app %s" % manifest.name)
 
 func window_open(window: AppWindow) -> void:
 	window.service = self
