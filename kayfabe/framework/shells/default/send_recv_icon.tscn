@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6piwmude7tao"]
+[gd_scene load_steps=4 format=3 uid="uid://b6piwmude7tao"]
 
 [ext_resource type="Script" path="res://framework/shells/default/send_recv_icon.gd" id="1_3rnj7"]
-[ext_resource type="Texture2D" uid="uid://b8370e2xw1hmq" path="res://framework/shells/default/send_recv_offline.tres" id="2_3243c"]
 
 [sub_resource type="SystemFont" id="SystemFont_12mne"]
 font_names = PackedStringArray("Microsoft Sans Serif")
@@ -13,50 +12,30 @@ font = SubResource("SystemFont_12mne")
 font_size = 8
 
 [node name="SendRecvIcon" type="PanelContainer"]
-custom_minimum_size = Vector2(32, 32)
-offset_right = 36.0
-offset_bottom = 36.0
+offset_right = 28.0
+offset_bottom = 24.0
 script = ExtResource("1_3rnj7")
 
-[node name="Base" type="TextureRect" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
-texture = ExtResource("2_3243c")
+theme_override_constants/separation = 1
 
-[node name="SendOverlay" type="TextureRect" parent="Base"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-expand_mode = 1
-stretch_mode = 5
-
-[node name="RecvOverlay" type="TextureRect" parent="Base"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-expand_mode = 1
-stretch_mode = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="SendContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="SendContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="VBoxContainer/SendContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/SendContainer"]
 layout_mode = 2
 text = "S"
 label_settings = SubResource("LabelSettings_ww856")
 vertical_alignment = 1
 
-[node name="SendLabel" type="Label" parent="VBoxContainer/SendContainer"]
+[node name="SendLabel" type="Label" parent="HBoxContainer/VBoxContainer/SendContainer"]
+custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "1024"
@@ -64,20 +43,33 @@ label_settings = SubResource("LabelSettings_ww856")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="RecvContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="RecvContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="VBoxContainer/RecvContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/RecvContainer"]
 layout_mode = 2
 text = "R"
 label_settings = SubResource("LabelSettings_ww856")
 vertical_alignment = 1
 
-[node name="RecvLabel" type="Label" parent="VBoxContainer/RecvContainer"]
+[node name="RecvLabel" type="Label" parent="HBoxContainer/VBoxContainer/RecvContainer"]
+custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "1024"
 label_settings = SubResource("LabelSettings_ww856")
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="DownloadIndicator" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(8, 20)
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"NetworkUploadIndicator"
+
+[node name="UploadIndicator" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(8, 20)
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"NetworkUploadIndicator"

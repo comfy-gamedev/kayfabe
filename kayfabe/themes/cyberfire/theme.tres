@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=64 format=3 uid="uid://bvq77hnbdaw8x"]
+[gd_resource type="Theme" load_steps=72 format=3 uid="uid://bvq77hnbdaw8x"]
 
 [ext_resource type="Texture2D" uid="uid://mh48osisb557" path="res://themes/cyberfire/cyberfire_icons.png" id="2_83hrn"]
 [ext_resource type="SystemFont" uid="uid://12by81v6gs72" path="res://themes/cyberfire/microsoft_sans_serif.tres" id="7_508xm"]
@@ -355,6 +355,38 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 corner_detail = 1
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_csy8f"]
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(149, 115, 4, 10)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gcg5x"]
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(182, 115, 4, 10)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uqc8d"]
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(160, 115, 4, 10)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_72g7d"]
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(171, 115, 4, 10)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rj0e3"]
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(154, 115, 4, 10)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kngny"]
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(187, 115, 4, 10)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_70v0s"]
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(165, 115, 4, 10)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_utbfi"]
+texture = ExtResource("2_83hrn")
+region_rect = Rect2(176, 115, 4, 10)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sgk6p"]
 content_margin_left = 2.0
 content_margin_top = 2.0
@@ -672,6 +704,14 @@ MarginContainer/constants/margin_right = 2
 MarginContainer/constants/margin_top = 2
 MenuOverlayPanelContainer/base_type = &"PanelContainer"
 MenuOverlayPanelContainer/styles/panel = SubResource("StyleBoxFlat_7v6j0")
+NetworkDownloadIndicator/styles/disconnected = SubResource("StyleBoxTexture_csy8f")
+NetworkDownloadIndicator/styles/high = SubResource("StyleBoxTexture_gcg5x")
+NetworkDownloadIndicator/styles/idle = SubResource("StyleBoxTexture_uqc8d")
+NetworkDownloadIndicator/styles/low = SubResource("StyleBoxTexture_72g7d")
+NetworkUploadIndicator/styles/disconnected = SubResource("StyleBoxTexture_rj0e3")
+NetworkUploadIndicator/styles/high = SubResource("StyleBoxTexture_kngny")
+NetworkUploadIndicator/styles/idle = SubResource("StyleBoxTexture_70v0s")
+NetworkUploadIndicator/styles/low = SubResource("StyleBoxTexture_utbfi")
 Panel/styles/panel = SubResource("StyleBoxFlat_sgk6p")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_sgk6p")
 ShellBarPanelContainer/base_type = &"PanelContainer"
