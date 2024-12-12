@@ -26,6 +26,7 @@ ArgParse="*res://framework/autoload/arg_parse.gd"
 PlayerProfileManager="*res://framework/autoload/player_profile_manager.gd"
 AppManager="*res://framework/autoload/app_manager.gd"
 RenderTracker="res://framework/autoload/render_tracker.gd"
+TitlebarManager="*res://framework/autoload/titlebar_manager.gd"
 
 [debug]
 

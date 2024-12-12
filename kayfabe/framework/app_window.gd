@@ -3,6 +3,8 @@ class_name AppWindow
 extends Container
 
 signal close_requested()
+signal focused()
+signal unfocused()
 
 enum {
 	FLAG_SHOW_TITLEBAR = 1,
@@ -109,9 +111,7 @@ func _get_minimum_size() -> Vector2:
 	return min_size
 
 func _sort_children() -> void:
-	if not frame:
-		print_stack()
-	var content_rect: Rect2 = frame.get_content_rect()
+	var content_rect: Rect2 = frame.get_content_rect() if frame else get_rect()
 	for i: int in get_child_count():
 		var c := get_child(i)
 		if c is Control:
@@ -138,10 +138,13 @@ func unmaximize() -> void:
 func bring_to_front() -> void:
 	Desktop.current.window_bring_to_front(self)
 
+func close() -> void:
+	Desktop.current.window_close(self)
+
 func _on_close_pressed() -> void:
 	close_requested.emit()
 	if close_when_requested:
-		Desktop.current.window_close(self)
+		close()
 
 func _on_maximize_pressed() -> void:
 	if not is_maximized:

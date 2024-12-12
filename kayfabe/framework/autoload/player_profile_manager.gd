@@ -1,10 +1,11 @@
 extends Node
 
+var profile_name: String
 var profile_root: String
 var profile: PlayerProfile
 
 func _ready() -> void:
-	var profile_name := "default"
+	profile_name = "default"
 	if ArgParse.has_arg("--player_profile"):
 		var arg := ArgParse.get_arg_value("--player_profile") as String
 		if not arg.is_valid_filename():
