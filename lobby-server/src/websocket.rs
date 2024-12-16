@@ -9,6 +9,9 @@ pub enum SocketMessageData {
         host_uuid: String,
         desktop_uuid: String,
     },
+    ClientAnnounce {
+        client_id: i32,
+    },
     Offer {
         sdp: String,
     },

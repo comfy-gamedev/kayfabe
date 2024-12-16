@@ -1,9 +1,10 @@
 use std::{collections::HashMap, net::SocketAddr, sync::Arc};
 
 use anyhow::{anyhow, bail, ensure, Result};
+use appstate::HOST_ID;
 use axum::{
     extract::{
-        ws::{WebSocket, WebSocketUpgrade},
+        ws::{Message, WebSocket, WebSocketUpgrade},
         Path, State,
     },
     http::StatusCode,
@@ -131,7 +132,7 @@ async fn handle_lobby_socket(mut socket: WebSocket, app_state: AppStateRef) -> R
 
                 if let Some(client_info) = lobby_info.clients.get(&msg.id) {
                     client_info.tx.send(ChannelMessage {
-                        sender_id: 0,
+                        sender_id: HOST_ID,
                         message: msg,
                     })?;
                 }
@@ -186,6 +187,13 @@ async fn handle_join_socket(
 ) -> Result<()> {
     let (mut socket_sender, mut socket_receiver) = socket.split();
 
+    socket_sender
+        .send(Message::Text(serde_json::to_string(&SocketMessage {
+            id: HOST_ID,
+            data: SocketMessageData::ClientAnnounce { client_id },
+        })?))
+        .await?;
+
     spawn_paired(
         async move {
             // Pump messages from the channel (sent from the lobby) to the socket.
@@ -215,7 +223,7 @@ async fn handle_join_socket(
 
                 tracing::debug!("Client {} sent message: {:?}", client_id, msg);
 
-                ensure!(msg.id == 0, "Invalid message, id should be 0.");
+                ensure!(msg.id == HOST_ID, "Invalid message, id should be HOST_ID.");
 
                 lobby_tx.send(ChannelMessage {
                     sender_id: client_id,

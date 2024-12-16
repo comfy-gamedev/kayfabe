@@ -5,6 +5,8 @@ use tokio::sync::{broadcast, Mutex, RwLock};
 
 use crate::SocketMessage;
 
+pub const HOST_ID: i32 = 1;
+
 /// Top-level app state.
 pub struct AppState {
     /// Currently active lobbies. Lobbies are active for the lifetime of the host's websocket connection.
@@ -148,7 +150,7 @@ impl LobbyInfo {
     pub fn new(desktop_uuid: String, tx: broadcast::Sender<ChannelMessage>) -> Self {
         Self {
             desktop_uuid,
-            next_client_id: 1,
+            next_client_id: 2,
             host_tx: tx,
             clients: HashMap::new(),
         }
@@ -176,7 +178,7 @@ impl LobbyKey {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ChannelMessage {
-    /// Sender client ID or 0 if sent by the host.
+    /// Sender client ID or HOST_ID if sent by the host.
     pub sender_id: i32,
     pub message: SocketMessage,
 }
