@@ -9,7 +9,7 @@ pub enum SocketMessageData {
         host_uuid: String,
         desktop_uuid: String,
     },
-    ClientAnnounce {
+    ClientIdentity {
         client_id: i32,
     },
     Offer {
@@ -19,7 +19,9 @@ pub enum SocketMessageData {
         sdp: String,
     },
     IceCandidate {
-        candidate: String,
+        media: String,
+        index: i32,
+        name: String,
     },
 }
 

@@ -170,9 +170,8 @@ async fn join_ws_handler(
         )
     };
 
-    let client_id = client.client_id;
-
     ws.on_upgrade(move |socket| async move {
+        let client_id = client.client_id;
         let _ = handle_join_socket(socket, app_state, client_id, client_rx, lobby_tx).await;
     })
 }
@@ -190,7 +189,7 @@ async fn handle_join_socket(
     socket_sender
         .send(Message::Text(serde_json::to_string(&SocketMessage {
             id: HOST_ID,
-            data: SocketMessageData::ClientAnnounce { client_id },
+            data: SocketMessageData::ClientIdentity { client_id },
         })?))
         .await?;
 
