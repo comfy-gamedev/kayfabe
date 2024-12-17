@@ -1,10 +1,21 @@
 extends Node
 
+const MACHINE_INFO_FILE = "user://machine_info.json"
+
+var machine_info: MachineInfo
+
 var profile_name: String
 var profile_root: String
 var profile: PlayerProfile
 
 func _ready() -> void:
+	if FileAccess.file_exists(MACHINE_INFO_FILE):
+		machine_info = JsonResource.load_json(MACHINE_INFO_FILE, MachineInfo)
+	else:
+		machine_info = MachineInfo.new()
+		machine_info.uuid = UUID.v7()
+		JsonResource.save_json(machine_info, MACHINE_INFO_FILE)
+	
 	profile_name = "default"
 	if ArgParse.has_arg("--player_profile"):
 		var arg := ArgParse.get_arg_value("--player_profile") as String

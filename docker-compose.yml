@@ -1,0 +1,17 @@
+
+services:
+  lobby-server:
+    container_name: kayfabe-lobby-server
+    restart: always
+    build:
+      context: ./lobby-server
+    environment:
+      PORT: 3000
+  nginx:
+    container_name: kayfabe-nginx
+    restart: always
+    build:
+      context: ./nginx
+    ports:
+      - "3000:80"
+    
