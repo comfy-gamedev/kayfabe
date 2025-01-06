@@ -1,7 +1,7 @@
 use std::{collections::HashMap, net::SocketAddr, sync::Arc};
 
 use anyhow::{anyhow, bail, ensure, Result};
-use appstate::HOST_ID;
+use appstate::{LobbyClientGuard, LobbyInfoGuard, HOST_ID};
 use axum::{
     extract::{
         ws::{Message, WebSocket, WebSocketUpgrade},
@@ -36,7 +36,7 @@ async fn main() {
     let app = Router::new()
         .route("/", get(root))
         .route("/lobby_ws", get(lobby_ws_handler))
-        .route("/join/:host_uuid/:desktop_uuid", get(join_ws_handler))
+        .route("/join/:host_uuid/:desktop_uuid", get(join_handler))
         .layer(TraceLayer::new_for_http())
         .with_state(app_state);
 
@@ -60,12 +60,12 @@ async fn root() -> Response {
 #[instrument]
 async fn lobby_ws_handler(ws: WebSocketUpgrade, State(app_state): State<AppStateRef>) -> Response {
     ws.on_upgrade(|socket| async move {
-        let _ = handle_lobby_socket(socket, app_state).await;
+        let _ = lobby_ws_process(socket, app_state).await;
     })
 }
 
 #[instrument(err, skip(socket))]
-async fn handle_lobby_socket(mut socket: WebSocket, app_state: AppStateRef) -> Result<()> {
+async fn lobby_ws_process(mut socket: WebSocket, app_state: AppStateRef) -> Result<()> {
     // Wait for the first message from the host.
     let Some(initial_message) = socket.next_message().await else {
         // Host disconnected before anything happens. A bit strange, but not an error.
@@ -145,14 +145,17 @@ async fn handle_lobby_socket(mut socket: WebSocket, app_state: AppStateRef) -> R
 }
 
 #[instrument]
-async fn join_ws_handler(
+async fn join_handler(
     ws: WebSocketUpgrade,
     State(app_state): State<AppStateRef>,
     Path((host_uuid, desktop_uuid)): Path<(String, String)>,
 ) -> Response {
     let lobby_key = LobbyKey::new(&host_uuid, &desktop_uuid);
 
-    let (client, client_rx, lobby_tx) = {
+    // Do some basic checks before upgrading the websocket,
+    // so we have a chance to 404 if the lobby doesn't exist.
+
+    let (lobby_client, client_rx, lobby_tx) = {
         let active_lobbies = app_state.active_lobbies.read().await;
 
         let Some(lobby_info) = active_lobbies.get(&lobby_key) else {
@@ -171,20 +174,21 @@ async fn join_ws_handler(
     };
 
     ws.on_upgrade(move |socket| async move {
-        let client_id = client.client_id;
-        let _ = handle_join_socket(socket, app_state, client_id, client_rx, lobby_tx).await;
+        let _ = join_process(socket, app_state, lobby_client, client_rx, lobby_tx).await;
     })
 }
 
-#[instrument(err, skip(socket))]
-async fn handle_join_socket(
+#[instrument(err, skip(socket, lobby_client))]
+async fn join_process(
     socket: WebSocket,
     app_state: AppStateRef,
-    client_id: i32,
+    lobby_client: LobbyClientGuard,
     mut client_rx: broadcast::Receiver<ChannelMessage>,
     lobby_tx: broadcast::Sender<ChannelMessage>,
 ) -> Result<()> {
     let (mut socket_sender, mut socket_receiver) = socket.split();
+
+    let client_id = lobby_client.client_id;
 
     socket_sender
         .send(Message::Text(serde_json::to_string(&SocketMessage {

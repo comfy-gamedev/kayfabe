@@ -37,14 +37,22 @@ gdscript/warnings/missing_tool=0
 window/stretch/aspect="ignore"
 window/stretch/scale=2.0
 
+[editor]
+
+run/main_run_args="--verbose --"
+
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/swatch_palette/plugin.cfg")
+enabled=PackedStringArray("res://addons/kayfabe_settings/plugin.cfg", "res://addons/swatch_palette/plugin.cfg")
 
 [gui]
 
 theme/custom="res://themes/cyberfire/theme.tres"
 theme/default_font_antialiasing=2
+
+[kayfabe]
+
+networking/webrtc_stun_servers=PackedStringArray("stun.l.google.com:19302", "stun1.l.google.com:19302", "stun2.l.google.com:19302", "stun3.l.google.com:19302", "stun4.l.google.com:19302")
 
 [rendering]
 

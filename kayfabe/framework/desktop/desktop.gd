@@ -36,7 +36,7 @@ func _ready() -> void:
 	print_verbose("DESKTOP READY")
 	if remote_url:
 		print_verbose("CONNECTING TO REMOTE")
-		desktop_multiplayer.start_client(remote_url)
+		await desktop_multiplayer.start_client_async(remote_url)
 		await desktop_multiplayer.connected_to_server
 		print_verbose("CONNECTED TO SERVER")
 		var server_desktop_metadata: DesktopMetadata = JsonResource.unpack(

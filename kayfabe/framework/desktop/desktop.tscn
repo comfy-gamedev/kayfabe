@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://q47mcsht12hf"]
 
-[ext_resource type="Script" uid="uid://dc2vuy8se8akx" path="res://framework/desktop/desktop.gd" id="1_dy4nd"]
+[ext_resource type="Script" path="res://framework/desktop/desktop.gd" id="1_dy4nd"]
 [ext_resource type="PackedScene" uid="uid://b6twsln376grv" path="res://framework/shells/default/shell.tscn" id="2_abvqg"]
 [ext_resource type="Script" path="res://framework/network/network_plumber.gd" id="2_ihny7"]
 [ext_resource type="Script" path="res://framework/network/network_transfer_handler.gd" id="3_ihny7"]

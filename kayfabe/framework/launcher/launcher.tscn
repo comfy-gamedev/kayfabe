@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://pll20oxcde3w"]
 
 [ext_resource type="Theme" uid="uid://k3xs7tj2j1ha" path="res://framework/launcher/launcher_theme.tres" id="1_ktluf"]
-[ext_resource type="Script" uid="uid://defp8frjceoir" path="res://framework/launcher/launcher.gd" id="2_fc3sy"]
-[ext_resource type="Script" uid="uid://dc2i4kuptofbf" path="res://framework/launcher/connect_dialog.gd" id="3_vucj0"]
+[ext_resource type="Script" path="res://framework/launcher/launcher.gd" id="2_fc3sy"]
+[ext_resource type="Script" path="res://framework/launcher/connect_dialog.gd" id="3_vucj0"]
 
 [node name="Launcher" type="PanelContainer"]
 anchors_preset = 15

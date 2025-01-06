@@ -1,17 +1,19 @@
 class_name DesktopMultiplayer
 extends MultiplayerAPIExtension
 
+const WebRTCLobbyClient = preload("webrtc_lobby_client.gd")
+
 const TRACE = true
 const KEY_PATH = "user://server_certificate_private.key"
 const CRT_PATH = "user://server_certificate_public.crt"
 const PORT = 8675
 
 var scene_multiplayer = SceneMultiplayer.new()
+var peer: WebRTCMultiplayerPeer
 
 var server_url: String
 
-var certificate_key: CryptoKey
-var certificate: X509Certificate
+var _lobby_server: WebRTCLobbyClient
 
 var _player_infos: Dictionary # { [peer_id: int]: PlayerInfo }
 var _server_info: ServerInfo
@@ -27,12 +29,17 @@ func _init() -> void:
 	scene_multiplayer.peer_packet.connect(WeakCallable.make_weak(_on_peer_packet))
 	
 	scene_multiplayer.auth_callback = WeakCallable.make_weak(_auth_callback)
+	
+	_lobby_server = WebRTCLobbyClient.new()
+	_lobby_server.recv_offer.connect(WeakCallable.make_weak(_on_lobby_server_recv_offer))
+	_lobby_server.recv_answer.connect(WeakCallable.make_weak(_on_lobby_server_recv_answer))
+	_lobby_server.recv_ice_candidate.connect(WeakCallable.make_weak(_on_lobby_server_recv_ice_candidate))
 
 func _poll() -> Error:
 	return scene_multiplayer.poll()
 
 func _rpc(peer: int, object: Object, method: StringName, args: Array) -> Error:
-	if TRACE: print_verbose("DesktopMultiplayer._rpc(%s, %s, %s, %s)" % [peer, object, method, args])
+	#if TRACE: print_verbose("DesktopMultiplayer._rpc(%s, %s, %s, %s)" % [peer, object, method, args])
 	return scene_multiplayer.rpc(peer, object, method, args)
 
 func _set_multiplayer_peer(p_peer: MultiplayerPeer) -> void:
@@ -77,27 +84,48 @@ func _object_configuration_remove(object: Object, config: Variant) -> Error:
 
 func start_server() -> Error:
 	if TRACE: print_verbose("DesktopMultiplayer.start_server()")
-	_load_certificate()
-	var peer = WebSocketMultiplayerPeer.new()
-	var tls_options = TLSOptions.server(certificate_key, certificate)
-	var err = peer.create_server(PORT, "*", tls_options)
+	
+	var x = ProjectSettings.has_setting("kayfabe/networking/lobby_server_host")
+	var lobby_server_host: String = ProjectSettings.get_setting_with_override("kayfabe/networking/lobby_server_host")
+	var lobby_server_use_tls: bool = ProjectSettings.get_setting_with_override("kayfabe/networking/lobby_server_use_tls")
+	var host_uuid: String = PlayerProfileManager.profile.id
+	var desktop_uuid: String = Desktop.current.uuid
+	
+	var err = _lobby_server.host(lobby_server_host, lobby_server_use_tls, host_uuid, desktop_uuid)
 	if err != OK:
 		if TRACE: print_verbose("DesktopMultiplayer.start_server(): Error %s" % [error_string(err)])
 		return err
-	server_url = "wss://localhost:%s/" % [PORT]
+	
+	var peer = WebRTCMultiplayerPeer.new()
+	err = peer.create_server()
+	if err != OK:
+		if TRACE: print_verbose("DesktopMultiplayer.start_server(): Error %s" % [error_string(err)])
+		return err
+	
+	server_url = _lobby_server.get_join_url(lobby_server_host, lobby_server_use_tls, host_uuid, desktop_uuid)
+	
 	multiplayer_peer = peer
 	connected_to_server.emit()
 	return OK
 
-func start_client(url: String) -> Error:
+func start_client_async(url: String) -> Error:
 	if TRACE: print_verbose("DesktopMultiplayer.start_client(%s)" % [url])
-	var peer = WebSocketMultiplayerPeer.new()
-	var tls_options = TLSOptions.client_unsafe()
-	var err = peer.create_client(url, tls_options)
+	
+	var err: Error = _lobby_server.join(url)
+	if err != OK:
+		if TRACE: print_verbose("DesktopMultiplayer.start_server(): Error %s" % [error_string(err)])
+		return err
+	
+	await _lobby_server.client_identified
+	
+	var peer = WebRTCMultiplayerPeer.new()
+	err = peer.create_client(_lobby_server.peer_id)
 	if err != OK:
 		if TRACE: print_verbose("DesktopMultiplayer.start_client(%s): Error %s" % [url, error_string(err)])
 		return err
+	
 	server_url = url
+	
 	multiplayer_peer = peer
 	return OK
 
@@ -111,38 +139,6 @@ func get_player_info(peer_id: int) -> PlayerInfo:
 
 func get_server_info() -> ServerInfo:
 	return _server_info
-
-func _load_certificate() -> void:
-	if certificate and certificate_key:
-		return
-	
-	if not FileAccess.file_exists(KEY_PATH) or not FileAccess.file_exists(CRT_PATH):
-		if FileAccess.file_exists(KEY_PATH):
-			var i = 1
-			var bak = KEY_PATH + ".bak" + str(i)
-			while FileAccess.file_exists(bak):
-				i += 1
-				bak = KEY_PATH + ".bak" + str(i)
-			DirAccess.rename_absolute(KEY_PATH, bak)
-		if FileAccess.file_exists(CRT_PATH):
-			var i = 1
-			var bak = CRT_PATH + ".bak" + str(i)
-			while FileAccess.file_exists(bak):
-				i += 1
-				bak = CRT_PATH + ".bak" + str(i)
-			DirAccess.rename_absolute(CRT_PATH, bak)
-		
-		var crypto = Crypto.new()
-		certificate_key = crypto.generate_rsa(4096)
-		certificate = crypto.generate_self_signed_certificate(certificate_key, "CN=self-signed.kayfabe.cloud,O=Kayfabe,C=US")
-		
-		certificate_key.save(KEY_PATH)
-		certificate.save(CRT_PATH)
-	else:
-		certificate_key = CryptoKey.new()
-		certificate_key.load(KEY_PATH)
-		certificate = X509Certificate.new()
-		certificate.load(CRT_PATH)
 
 func _on_connected_to_server() -> void:
 	if TRACE: print_verbose("DesktopMultiplayer._on_connected_to_server()")
@@ -223,6 +219,57 @@ func _auth_callback(id: int, data: PackedByteArray) -> void:
 		
 		scene_multiplayer.complete_auth(id)
 
+#region WebRTC
+
+func _on_lobby_server_recv_offer(id: int, sdp: String) -> void:
+	if peer.has_peer(id):
+		return
+	var conn = _create_webrtc_peer_connection(id)
+	conn.set_remote_description("offer", sdp)
+	peer.add_peer(conn, id)
+
+func _on_lobby_server_recv_answer(id: int, sdp: String) -> void:
+	if peer.has_peer(id):
+		peer.get_peer(id).connection.set_remote_description("answer", sdp)
+
+func _on_lobby_server_recv_ice_candidate(id: int, media: String, index: int, name: String) -> void:
+	if peer.has_peer(id):
+		peer.get_peer(id).connection.add_ice_candidate(media, index, name)
+
+func _create_webrtc_peer_connection(id: int) -> WebRTCPeerConnection:
+	var conn = WebRTCPeerConnection.new()
+	conn.session_description_created.connect(_on_connection_session_description_created.bind(id))
+	conn.ice_candidate_created.connect(_on_connection_ice_candidate_created.bind(id))
+	
+	var stun_servers := Array(ProjectSettings.get_setting_with_override("kayfabe/networking/webrtc_stun_servers"))
+	stun_servers = stun_servers.map(func (s): return "stun:" + s)
+	
+	conn.initialize({
+		"iceServers": [
+			{
+				"urls": stun_servers,
+			}
+		]
+	})
+	
+	peer.add_peer(conn, id)
+	
+	return conn
+
+func _on_connection_session_description_created(type: String, sdp: String, id: int) -> void:
+	if peer.has_peer(id):
+		peer.get_peer(id).connection.set_local_description(type, sdp)
+	
+	match type:
+		"offer":
+			_lobby_server.send_offer(id, sdp)
+		"answer":
+			_lobby_server.send_answer(id, sdp)
+
+func _on_connection_ice_candidate_created(media: String, index: int, name: String, id: int) -> void:
+	_lobby_server.send_ice_candidate(id, media, index, name)
+
+#endregion WebRTC
 
 class PlayerInfo:
 	var id: StringName

@@ -7,7 +7,7 @@ signal recv_ice_candidate(id: int, media: String, index: int, name: String)
 
 var peer_id: int
 
-var host_uuid: String;
+var host_uuid: String
 var desktop_uuid: String
 
 func _init() -> void:
@@ -15,17 +15,20 @@ func _init() -> void:
 	disconnected.connect(_on_disconnected)
 	recv_text.connect(_on_recv)
 
-func host(p_host_uuid: String, p_desktop_uuid: String) -> void:
+func host(lobby_server_host: String, use_tls: bool, p_host_uuid: String, p_desktop_uuid: String) -> Error:
 	peer_id = 1
 	host_uuid = p_host_uuid
 	desktop_uuid = p_desktop_uuid
-	connect_to_url("ws://localhost:3000/lobby_ws")
+	return connect_to_url("%s//%s/lobby_ws" % ["wss:" if use_tls else "ws:", lobby_server_host])
 
-func join(p_host_uuid: String, p_desktop_uuid: String) -> void:
+func get_join_url(lobby_server_host: String, use_tls: bool, p_host_uuid: String, p_desktop_uuid: String) -> String:
+	return "%s//%s/join/%s/%s" % ["wss:" if use_tls else "ws:", lobby_server_host, host_uuid, desktop_uuid]
+
+func join(join_url: String) -> Error:
 	peer_id = 0
-	host_uuid = p_host_uuid
-	desktop_uuid = p_desktop_uuid
-	connect_to_url("ws://localhost:3000/join/%s/%s" % [host_uuid, desktop_uuid])
+	host_uuid = ""
+	desktop_uuid = ""
+	return connect_to_url(join_url)
 
 func send_offer(id: int, sdp: String) -> void:
 	send_text(JSON.stringify({
@@ -46,8 +49,6 @@ func send_ice_candidate(id: int, media: String, index: int, p_name: String) -> v
 	}))
 
 func _on_connected() -> void:
-	print("_on_connected()")
-	
 	if peer_id == 1:
 		send_text(JSON.stringify({
 			"id": 1,
@@ -55,12 +56,9 @@ func _on_connected() -> void:
 		}))
 
 func _on_disconnected() -> void:
-	print("_on_disconnected()")
 	pass
 
 func _on_recv(message_text: String) -> void:
-	print("[%s] _on_recv(%s)" % [peer_id, message_text])
-	
 	var message = JSON.parse_string(message_text)
 	
 	match message.data.keys()[0]:

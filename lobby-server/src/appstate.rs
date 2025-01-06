@@ -58,7 +58,7 @@ impl AppStateExt for AppStateRef {
         let mut active_lobbies = self.active_lobbies.write().await;
 
         let lobby_key = LobbyKey::new(&host_uuid, &desktop_uuid);
-        let lobby_info = LobbyInfo::new(desktop_uuid, host_tx);
+        let lobby_info = LobbyInfo::new(host_uuid, desktop_uuid, host_tx);
 
         active_lobbies.insert(lobby_key.clone(), Mutex::new(lobby_info));
 
@@ -87,7 +87,7 @@ impl AppStateExt for AppStateRef {
             .clients
             .insert(client_id, LobbyClient { tx: client_tx });
 
-        let lobby_key = LobbyKey::new(&lobby_info.desktop_uuid, &lobby_info.desktop_uuid);
+        let lobby_key = LobbyKey::new(&lobby_info.host_uuid, &lobby_info.desktop_uuid);
 
         LobbyClientGuard {
             app_state: self.clone(),
@@ -127,12 +127,37 @@ impl Drop for LobbyClientGuard {
         let app_state = self.app_state.clone();
         let lobby_key = take(&mut self.lobby_key);
         let client_id = self.client_id;
+        println!(
+            "Custom backtrace: {}",
+            std::backtrace::Backtrace::force_capture()
+        );
         tokio::spawn(async move {
             tracing::info!("Removing client {} from lobby {}", client_id, lobby_key.key);
             let active_lobbies = app_state.active_lobbies.read().await;
+            tracing::info!(
+                "RWLOCK READ Removing client {} from lobby {}",
+                client_id,
+                lobby_key.key
+            );
             if let Some(mutex) = active_lobbies.get(&lobby_key) {
+                tracing::info!(
+                    "GOT MUTEX Removing client {} from lobby {}",
+                    client_id,
+                    lobby_key.key
+                );
                 let mut lobby_info = mutex.lock().await;
+                tracing::info!(
+                    "ACTUALLY Removing client {} from lobby {}",
+                    client_id,
+                    lobby_key.key
+                );
                 lobby_info.clients.remove(&client_id);
+            } else {
+                tracing::info!(
+                    "FAILED Removing client {} from lobby {}",
+                    client_id,
+                    lobby_key.key
+                );
             }
         });
     }
@@ -140,6 +165,7 @@ impl Drop for LobbyClientGuard {
 
 #[derive(Clone)]
 pub struct LobbyInfo {
+    pub host_uuid: String,
     pub desktop_uuid: String,
     pub host_tx: broadcast::Sender<ChannelMessage>,
     pub clients: HashMap<i32, LobbyClient>,
@@ -147,8 +173,13 @@ pub struct LobbyInfo {
 }
 
 impl LobbyInfo {
-    pub fn new(desktop_uuid: String, tx: broadcast::Sender<ChannelMessage>) -> Self {
+    pub fn new(
+        host_uuid: String,
+        desktop_uuid: String,
+        tx: broadcast::Sender<ChannelMessage>,
+    ) -> Self {
         Self {
+            host_uuid,
             desktop_uuid,
             next_client_id: 2,
             host_tx: tx,
