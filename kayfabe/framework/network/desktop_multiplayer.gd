@@ -36,6 +36,7 @@ func _init() -> void:
 	_lobby_server.recv_ice_candidate.connect(WeakCallable.make_weak(_on_lobby_server_recv_ice_candidate))
 
 func _poll() -> Error:
+	_lobby_server.poll()
 	return scene_multiplayer.poll()
 
 func _rpc(peer: int, object: Object, method: StringName, args: Array) -> Error:
@@ -96,7 +97,7 @@ func start_server() -> Error:
 		if TRACE: print_verbose("DesktopMultiplayer.start_server(): Error %s" % [error_string(err)])
 		return err
 	
-	var peer = WebRTCMultiplayerPeer.new()
+	peer = WebRTCMultiplayerPeer.new()
 	err = peer.create_server()
 	if err != OK:
 		if TRACE: print_verbose("DesktopMultiplayer.start_server(): Error %s" % [error_string(err)])
@@ -116,15 +117,20 @@ func start_client_async(url: String) -> Error:
 		if TRACE: print_verbose("DesktopMultiplayer.start_server(): Error %s" % [error_string(err)])
 		return err
 	
+	if TRACE: print_verbose("DesktopMultiplayer.start_server(): CLIENT AWAITING IDENTIFICATION" % [])
 	await _lobby_server.client_identified
+	if TRACE: print_verbose("DesktopMultiplayer.start_server(): CLIENT IDENTIFIED" % [])
 	
-	var peer = WebRTCMultiplayerPeer.new()
+	peer = WebRTCMultiplayerPeer.new()
 	err = peer.create_client(_lobby_server.peer_id)
 	if err != OK:
 		if TRACE: print_verbose("DesktopMultiplayer.start_client(%s): Error %s" % [url, error_string(err)])
 		return err
 	
 	server_url = url
+	
+	var w = _create_webrtc_peer_connection(1)
+	w.create_offer()
 	
 	multiplayer_peer = peer
 	return OK
@@ -222,6 +228,7 @@ func _auth_callback(id: int, data: PackedByteArray) -> void:
 #region WebRTC
 
 func _on_lobby_server_recv_offer(id: int, sdp: String) -> void:
+	if TRACE: print_verbose("DesktopMultiplayer._on_lobby_server_recv_offer(%s, %s)" % [id, sdp])
 	if peer.has_peer(id):
 		return
 	var conn = _create_webrtc_peer_connection(id)
@@ -229,10 +236,12 @@ func _on_lobby_server_recv_offer(id: int, sdp: String) -> void:
 	peer.add_peer(conn, id)
 
 func _on_lobby_server_recv_answer(id: int, sdp: String) -> void:
+	if TRACE: print_verbose("DesktopMultiplayer._on_lobby_server_recv_answer(%s, %s)" % [id, sdp])
 	if peer.has_peer(id):
 		peer.get_peer(id).connection.set_remote_description("answer", sdp)
 
 func _on_lobby_server_recv_ice_candidate(id: int, media: String, index: int, name: String) -> void:
+	if TRACE: print_verbose("DesktopMultiplayer._on_lobby_server_recv_ice_candidate(%s, %s, %s, %s)" % [id, media, index, name])
 	if peer.has_peer(id):
 		peer.get_peer(id).connection.add_ice_candidate(media, index, name)
 

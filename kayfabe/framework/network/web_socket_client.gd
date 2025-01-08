@@ -24,6 +24,7 @@ func connect_to_url(url: String) -> Error:
 		return err
 	
 	_last_state = socket.get_ready_state()
+	if TRACE: print_verbose("WebSocketClient: connect_to_url(%s) -> OK" % [url])
 	return OK
 
 func close(code: int = 1000, reason: String = "") -> void:

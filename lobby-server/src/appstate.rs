@@ -127,37 +127,12 @@ impl Drop for LobbyClientGuard {
         let app_state = self.app_state.clone();
         let lobby_key = take(&mut self.lobby_key);
         let client_id = self.client_id;
-        println!(
-            "Custom backtrace: {}",
-            std::backtrace::Backtrace::force_capture()
-        );
         tokio::spawn(async move {
-            tracing::info!("Removing client {} from lobby {}", client_id, lobby_key.key);
             let active_lobbies = app_state.active_lobbies.read().await;
-            tracing::info!(
-                "RWLOCK READ Removing client {} from lobby {}",
-                client_id,
-                lobby_key.key
-            );
             if let Some(mutex) = active_lobbies.get(&lobby_key) {
-                tracing::info!(
-                    "GOT MUTEX Removing client {} from lobby {}",
-                    client_id,
-                    lobby_key.key
-                );
                 let mut lobby_info = mutex.lock().await;
-                tracing::info!(
-                    "ACTUALLY Removing client {} from lobby {}",
-                    client_id,
-                    lobby_key.key
-                );
+                tracing::info!("Removing client {} from lobby {}", client_id, lobby_key.key);
                 lobby_info.clients.remove(&client_id);
-            } else {
-                tracing::info!(
-                    "FAILED Removing client {} from lobby {}",
-                    client_id,
-                    lobby_key.key
-                );
             }
         });
     }

@@ -52,6 +52,8 @@ theme/default_font_antialiasing=2
 
 [kayfabe]
 
+networking/lobby_server_host="lobby.kayfabe.cloud"
+networking/lobby_server_use_tls=true
 networking/webrtc_stun_servers=PackedStringArray("stun.l.google.com:19302", "stun1.l.google.com:19302", "stun2.l.google.com:19302", "stun3.l.google.com:19302", "stun4.l.google.com:19302")
 
 [rendering]
