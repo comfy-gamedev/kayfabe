@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cnimd37vysl35"]
 
-[ext_resource type="Script" path="res://framework/launcher/launcher_row.gd" id="1_7klqe"]
+[ext_resource type="Script" uid="uid://cmw4qvsdhp0ou" path="res://framework/launcher/launcher_row.gd" id="1_7klqe"]
 [ext_resource type="Texture2D" uid="uid://b55okj8167m8s" path="res://themes/cyberfire/bliss.png" id="1_xxyhn"]
 
 [node name="LauncherRow" type="PanelContainer"]

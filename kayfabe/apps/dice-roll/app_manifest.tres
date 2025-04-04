@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="AppManifest" load_steps=3 format=3 uid="uid://dh7uejjgmfpw"]
 
 [ext_resource type="Texture2D" uid="uid://cdc7x3ayaxrhc" path="res://apps/dice-roll/icon.png" id="1_cycw4"]
-[ext_resource type="Script" uid="uid://bokvmkp6a0no8" path="res://framework/resource_types/app_manifest.gd" id="2_4tigr"]
+[ext_resource type="Script" uid="uid://h7rpsbb2ncea" path="res://framework/resource_types/app_manifest.gd" id="2_4tigr"]
 
 [resource]
 script = ExtResource("2_4tigr")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bwi41e1325xr2"]
 
-[ext_resource type="Script" path="res://actors/base_actor.gd" id="1_3osp8"]
+[ext_resource type="Script" uid="uid://bwrqecp7fpg5a" path="res://actors/base_actor.gd" id="1_3osp8"]
 
 [node name="DiceRoller" type="Node2D"]
 script = ExtResource("1_3osp8")

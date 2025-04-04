@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ct5qq8nitawj0"]
 
-[ext_resource type="Script" path="res://framework/default_app_window_frame.gd" id="1_ql5xk"]
+[ext_resource type="Script" uid="uid://bt432fgwkc414" path="res://framework/default_app_window_frame.gd" id="1_ql5xk"]
 
 [node name="AppWindowFrame" type="VBoxContainer"]
 anchors_preset = 15

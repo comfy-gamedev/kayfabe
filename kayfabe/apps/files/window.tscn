@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bkap4q1qo7126"]
 
-[ext_resource type="Script" path="res://apps/files/window.gd" id="1_hs3ti"]
+[ext_resource type="Script" uid="uid://dq3k5ms8v1mqc" path="res://apps/files/window.gd" id="1_hs3ti"]
 
 [node name="Files" type="Container"]
 offset_right = 187.0
