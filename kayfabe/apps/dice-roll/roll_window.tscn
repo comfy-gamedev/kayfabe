@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c3dtlr6nvmg5o"]
 
-[ext_resource type="Script" path="res://apps/dice-roll/roll_window.gd" id="1_ryasa"]
-[ext_resource type="Script" path="res://framework/app_window.gd" id="1_yygp2"]
+[ext_resource type="Script" uid="uid://crxcrrsgxet7k" path="res://apps/dice-roll/roll_window.gd" id="1_ryasa"]
+[ext_resource type="Script" uid="uid://ctv73qydgn0yu" path="res://framework/app_window.gd" id="1_yygp2"]
 [ext_resource type="PackedScene" uid="uid://xeo71s0b8g8a" path="res://framework/transient_app_window_frame.tscn" id="2_ryasa"]
 
 [node name="DiceRollTransientWindow" type="Container"]

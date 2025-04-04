@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://1i32v7m43w1c"]
 
-[ext_resource type="Script" path="res://framework/app_window.gd" id="1_n17ra"]
-[ext_resource type="Script" path="res://apps/dice-roll/controller.gd" id="1_svd1v"]
+[ext_resource type="Script" uid="uid://ctv73qydgn0yu" path="res://framework/app_window.gd" id="1_n17ra"]
+[ext_resource type="Script" uid="uid://c8a3yq200mm0s" path="res://apps/dice-roll/controller.gd" id="1_svd1v"]
 [ext_resource type="Texture2D" uid="uid://cvyp50mdyhfgn" path="res://apps/dice-roll/d20.png" id="3_er7le"]
-[ext_resource type="Script" path="res://apps/dice-roll/die_counter.gd" id="4_riek0"]
+[ext_resource type="Script" uid="uid://dkwxyr6ov82ii" path="res://apps/dice-roll/die_counter.gd" id="4_riek0"]
 [ext_resource type="Texture2D" uid="uid://08gw2so4ewj" path="res://apps/dice-roll/d2.png" id="5_fing5"]
 [ext_resource type="Texture2D" uid="uid://b8p86resl0sqf" path="res://apps/dice-roll/d4.png" id="6_rour3"]
 [ext_resource type="Texture2D" uid="uid://dqh1dhun8xtme" path="res://apps/dice-roll/d6.png" id="7_5nd1i"]

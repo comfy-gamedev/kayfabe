@@ -1,12 +1,12 @@
 [gd_scene load_steps=11 format=3 uid="uid://b6twsln376grv"]
 
-[ext_resource type="Script" path="res://framework/shells/default/shell.gd" id="1_qlls7"]
-[ext_resource type="Script" uid="uid://bwttgystohi7o" path="res://framework/shells/default/app_item_list.gd" id="2_nwivk"]
+[ext_resource type="Script" uid="uid://lfg5slk1i26g" path="res://framework/shells/default/shell.gd" id="1_qlls7"]
+[ext_resource type="Script" uid="uid://bqtqxqeh2b5ls" path="res://framework/shells/default/app_item_list.gd" id="2_nwivk"]
 [ext_resource type="Texture2D" uid="uid://mh48osisb557" path="res://themes/cyberfire/cyberfire_icons.png" id="2_pdc4m"]
 [ext_resource type="PackedScene" uid="uid://b6piwmude7tao" path="res://framework/shells/default/send_recv_icon.tscn" id="2_ww856"]
-[ext_resource type="Script" uid="uid://bsk5525ny6cuu" path="res://framework/shells/default/search_line_edit.gd" id="3_82wmq"]
-[ext_resource type="Script" uid="uid://dj3dbs6vq5jwh" path="res://framework/shells/default/file_item_list.gd" id="4_hoiib"]
-[ext_resource type="Script" uid="uid://5jt0ny5rpjmy" path="res://framework/shells/default/settings_item_list.gd" id="5_6w2ko"]
+[ext_resource type="Script" uid="uid://di3el7p344gjb" path="res://framework/shells/default/search_line_edit.gd" id="3_82wmq"]
+[ext_resource type="Script" uid="uid://byfnvul2wjvye" path="res://framework/shells/default/file_item_list.gd" id="4_hoiib"]
+[ext_resource type="Script" uid="uid://cgrov4w8ry5oj" path="res://framework/shells/default/settings_item_list.gd" id="5_6w2ko"]
 [ext_resource type="PackedScene" uid="uid://c4kcbhhjvkdp2" path="res://framework/shells/default/network_panel_container.tscn" id="6_j6ciu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2hlin"]

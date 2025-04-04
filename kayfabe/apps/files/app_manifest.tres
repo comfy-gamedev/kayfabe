@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AppManifest" load_steps=3 format=3 uid="uid://28b4cjbkrdnd"]
 
-[ext_resource type="Script" path="res://framework/resource_types/app_manifest.gd" id="1_88bxr"]
+[ext_resource type="Script" uid="uid://h7rpsbb2ncea" path="res://framework/resource_types/app_manifest.gd" id="1_88bxr"]
 [ext_resource type="Texture2D" uid="uid://blcvee2ke8n07" path="res://apps/files/icon.png" id="1_n3bsp"]
 
 [resource]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b6piwmude7tao"]
 
-[ext_resource type="Script" path="res://framework/shells/default/send_recv_icon.gd" id="1_3rnj7"]
+[ext_resource type="Script" uid="uid://eegnfihkgdcx" path="res://framework/shells/default/send_recv_icon.gd" id="1_3rnj7"]
 [ext_resource type="Texture2D" uid="uid://b8370e2xw1hmq" path="res://framework/shells/default/send_recv_offline.tres" id="2_3243c"]
 
 [sub_resource type="SystemFont" id="SystemFont_12mne"]

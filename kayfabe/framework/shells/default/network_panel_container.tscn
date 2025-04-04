@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c4kcbhhjvkdp2"]
 
-[ext_resource type="Script" uid="uid://b2ab6lpke0uo0" path="res://framework/shells/default/network_panel_container.gd" id="1_b2qex"]
+[ext_resource type="Script" uid="uid://ba4anrna70ou4" path="res://framework/shells/default/network_panel_container.gd" id="1_b2qex"]
 
 [node name="NetworkPanelContainer" type="PanelContainer"]
 custom_minimum_size = Vector2(200, 0)
